@@ -1,7 +1,7 @@
 module.exports = {
   command: 'mods',
   restricted: false,
-  usage: 'Type `$$mods` to se the mods definition (bitwise enum)',
+  usage: 'Type `$$mods` to see the mods definition (bitwise enum)',
   action() {
     return `
 \`\`\`csharp
