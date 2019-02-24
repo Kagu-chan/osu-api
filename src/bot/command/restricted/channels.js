@@ -3,8 +3,8 @@ const _ = require('lodash');
 module.exports = {
   command: 'channels',
   restricted: true,
-  usage: 'Type \`$$channels\` to get info about the server',
-  action(bot, message, ...args) {
+  usage: 'Type `$$channels` to get info about the server',
+  action(bot) {
     const guilds = bot.getGuilds().array();
     const channels = bot.botChannels;
 
@@ -30,5 +30,5 @@ module.exports = {
 
     msg.push('```');
     return _.flatten(msg).join('\n');
-  }
-}
+  },
+};

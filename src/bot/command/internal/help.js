@@ -17,12 +17,11 @@ module.exports = {
       if (commandObject) {
         if (_.isString(commandObject.usage)) {
           return help(commandObject.usage);
-        } else {
-          return commandObject.usage(bot, message, help);
         }
+        return commandObject.usage(bot, message, help);
       }
       return `Command \`${process.env.BOT_COMMAND_PREFIX}${command}\` does not exist!`;
     }
     return help(bot.commands.help.usage);
-  }
-}
+  },
+};

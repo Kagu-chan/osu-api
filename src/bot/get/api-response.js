@@ -4,7 +4,7 @@ const https = require('https');
 module.exports = (bot, endpoint, data, ...args) => {
   const url = `${process.env.API_URL}/${endpoint}?k=${process.env.API_KEY}`;
   const urlBuilder = [
-    url
+    url,
   ];
 
   bot.parseArguments(data, ...args);
@@ -22,7 +22,7 @@ module.exports = (bot, endpoint, data, ...args) => {
 
       resp.on('data', (chunk) => {
         responseData += chunk;
-      })
+      });
       resp.on('end', () => {
         resolve(responseData);
       });

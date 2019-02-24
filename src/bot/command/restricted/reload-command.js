@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 module.exports = {
   command: 'reload-command',
   usage: 'Type `$$reload-command COMMAND_NAME` to reload a text command definition',
@@ -17,5 +15,5 @@ module.exports = {
     bot.registerCommand(cmdPath, command);
 
     return `Reloaded command \`${cmdPath}/${process.env.BOT_COMMAND_PREFIX}${command}\``;
-  }
-}
+  },
+};

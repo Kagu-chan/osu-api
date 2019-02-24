@@ -4,7 +4,7 @@ module.exports = (bot) => {
   const guilds = bot.getGuilds();
   const botChannels = [];
 
-  guilds.forEach((guild => {
+  guilds.forEach(((guild) => {
     const channels = bot.getChannels(guild);
 
     botChannels.push(channels.filter((channel) => {
@@ -16,4 +16,4 @@ module.exports = (bot) => {
   }));
 
   return _.flatten(botChannels);
-}
+};

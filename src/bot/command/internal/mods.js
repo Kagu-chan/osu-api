@@ -1,3 +1,4 @@
+/* eslint-disable no-tabs */
 module.exports = {
   command: 'mods',
   restricted: false,
@@ -45,5 +46,6 @@ enum Mods
 }
 \`\`\`
     `;
-  }
+  },
 };
+/* eslint-enable no-tabs */

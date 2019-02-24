@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 module.exports = {
   command: 'unload-command',
   usage: 'Type `$$unload-command COMMAND_NAME` to unload a text command definition',
@@ -13,11 +11,11 @@ module.exports = {
     const cmd = `../${cmdPath}/${command}`;
 
     delete require.cache[require.resolve(cmd)];
-    delete bot.commands[command];
+    delete bot.commands[command]; // eslint-disable-line no-param-reassign
 
     const msg = `Unloaded command \`${process.env.BOT_COMMAND_PREFIX}${command}\``;
 
     console.log(msg);
     return msg;
-  }
-}
+  },
+};

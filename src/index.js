@@ -10,12 +10,12 @@ bot.registerCommands();
 bot.client.on('error', (err) => {
   console.log('Caught socket exception:\n', `${err.name}\n${err.message}\n${err.stack}`);
 
-  setTimeout(() => {      
+  setTimeout(() => {
     bot.doConnect(process.env.BOT_TOKEN);
   }, 5000);
 });
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', (err) => {
   console.log('Caught exception:\n', `${err.name}\n${err.message}\n${err.stack}`);
 
   const { client } = bot;

@@ -7,4 +7,4 @@ module.exports = (bot) => {
       console.log(`Registering newly created channel ${channel.name} on ${channel.guild.name}`);
     }
   });
-}
+};

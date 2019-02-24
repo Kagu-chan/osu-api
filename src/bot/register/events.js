@@ -9,4 +9,4 @@ module.exports = (bot) => {
   bot.eventGuildDelete();
 
   bot.eventMessage();
-}
+};

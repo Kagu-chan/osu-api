@@ -1,5 +1,4 @@
 const FS = require('fs');
-const _ = require('lodash');
 
 module.exports = {
   command: 'load-command',
@@ -14,8 +13,7 @@ module.exports = {
       bot.registerCommand(cmdPath, command);
 
       return `Loaded command \`${cmdPath}/${process.env.BOT_COMMAND_PREFIX}${command}\``;
-    } else {
-      return `Could not find command \`${cmdPath}/${process.env.BOT_COMMAND_PREFIX}${command}\``;
     }
-  }
-}
+    return `Could not find command \`${cmdPath}/${process.env.BOT_COMMAND_PREFIX}${command}\``;
+  },
+};

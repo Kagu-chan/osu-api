@@ -10,15 +10,15 @@ module.exports = (bot) => {
       channels.filter((channel) => {
         const { type, name } = channel;
         if (type !== 'text') return false;
-        
+
         return name.match(process.env.BOT_CHANNEL_REGEX);
-      }).array()
+      }).array(),
     ];
 
     _.assign(bot, {
-      botChannels: _.flatten(allChannels)
-    })
+      botChannels: _.flatten(allChannels),
+    });
 
     console.log(`Joined guild ${guild.name} - channels updated`);
   });
-}
+};

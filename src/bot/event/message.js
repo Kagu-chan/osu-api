@@ -5,8 +5,10 @@ module.exports = (bot) => {
 
   client.on('message', (receivedMessage) => {
     // Prevent bot from responding to its own messages or messages not directed to him
-    if (receivedMessage.author === client.user || !receivedMessage.content.startsWith(process.env.BOT_COMMAND_PREFIX)) {
-      return
+    if (receivedMessage.author === client.user
+      || !receivedMessage.content.startsWith(process.env.BOT_COMMAND_PREFIX)
+    ) {
+      return;
     }
 
     // Ignore messages in channels the bot is not listening to

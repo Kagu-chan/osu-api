@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const _ = require('lodash');
 
 const bot = {};
@@ -34,7 +35,8 @@ _.assign(bot, {
 
 _.assign(bot, {
   client: bot.getClient(),
-  commands: {}
+  commands: {},
 });
 
 module.exports = bot;
+/* eslint-enable global-require */

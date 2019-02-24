@@ -7,9 +7,9 @@ module.exports = (bot) => {
     const channels = bot.botChannels.filter(channel => channel.guild.id !== guild.id);
 
     _.assign(bot, {
-      botChannels: channels
+      botChannels: channels,
     });
 
     console.log(`Left guild ${guild.name} - channels removed`);
   });
-}
+};

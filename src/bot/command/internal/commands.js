@@ -3,11 +3,11 @@ const _ = require('lodash');
 module.exports = {
   command: 'commands',
   restricted: false,
-  usage: 'Type \`$$commands\` to get a list of commands available for you',
-  action(bot, message, ...args) {
+  usage: 'Type `$$commands` to get a list of commands available for you',
+  action(bot, message) {
     const result = [
       '```',
-      'Available commands:'
+      'Available commands:',
     ];
 
     result.push(_.chain(bot.commands)
@@ -27,5 +27,5 @@ module.exports = {
     result.push('```');
 
     return _.flatten(result).join('\n');
-  }
-}
+  },
+};

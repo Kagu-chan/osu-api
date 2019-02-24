@@ -12,13 +12,13 @@ module.exports = {
   action(bot, message, user, ...args) {
     const endPoint = 'get_user';
     const data = {
-      u: user
+      u: user,
     };
 
     if (!user) {
-      return 'At least an user name or user id is required'
+      return 'At least an user name or user id is required';
     }
 
     return bot.handleApiRequest(message.channel, endPoint, data, ...args);
-  }
-}
+  },
+};

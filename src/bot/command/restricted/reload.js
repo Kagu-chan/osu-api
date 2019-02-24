@@ -4,7 +4,7 @@ module.exports = {
   command: 'reload',
   usage: 'Type `$$reload` to reload all servers and commands',
   restricted: true,
-  action(bot, message) {
+  action(bot) {
     console.log('Reload commands...');
     _.each(bot.commands, ({ command, cmdPath }) => {
       const cmd = `../${cmdPath}/${command}`;
@@ -13,7 +13,7 @@ module.exports = {
     });
 
     _.assign(bot, {
-      commands: {}
+      commands: {},
     });
     bot.registerCommands();
 
@@ -21,11 +21,11 @@ module.exports = {
 
     const botChannels = bot.getBotChannels();
     _.assign(bot, {
-      botChannels
+      botChannels,
     });
 
     console.log('Reloaded channels.');
 
     return 'Reloaded server configuration';
-  }
-}
+  },
+};
