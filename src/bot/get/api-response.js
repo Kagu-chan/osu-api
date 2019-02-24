@@ -1,13 +1,15 @@
 const _ = require('lodash');
 const https = require('https');
 
-module.exports = (bot, endpoint, args) => {
+module.exports = (bot, endpoint, data, ...args) => {
   const url = `${process.env.API_URL}/${endpoint}?k=${process.env.API_KEY}`;
   const urlBuilder = [
     url
   ];
 
-  _.forEach(args, (value, key) => {
+  bot.parseArguments(data, ...args);
+
+  _.forEach(data, (value, key) => {
     if (value !== undefined) {
       urlBuilder.push(`${key}=${value}`);
     }
@@ -16,13 +18,13 @@ module.exports = (bot, endpoint, args) => {
   const finalUrl = urlBuilder.join('&');
   const prom = new Promise((resolve, reject) => {
     https.get(finalUrl, (resp) => {
-      let data = '';
+      let responseData = '';
 
       resp.on('data', (chunk) => {
-        data += chunk;
+        responseData += chunk;
       })
       resp.on('end', () => {
-        resolve(data);
+        resolve(responseData);
       });
     }).on('error', reject);
   });

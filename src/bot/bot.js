@@ -11,6 +11,8 @@ _.assign(bot, {
 
   handleApiRequest: require('./handle/api-request').bind(undefined, bot),
 
+  parseArguments: require('./parse/arguments').bind(undefined, bot),
+
   doConnect: require('./do/connect').bind(undefined, bot),
   doSend: require('./do/send').bind(undefined, bot),
 
