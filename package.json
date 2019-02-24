@@ -5,10 +5,16 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start": "node .",
+    "lint": "eslint ."
   },
   "author": "Kagu-chan",
   "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0"
+  },
   "dependencies": {
     "bluebird": "^3.5.1",
     "discord.js": "^11.3.2",

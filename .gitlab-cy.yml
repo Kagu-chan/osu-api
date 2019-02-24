@@ -1,0 +1,13 @@
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  untracked: true
+  paths:
+    - node_modules/
+
+lint:
+  tags:
+    - docker
+  image: node:6
+  script:
+    - npm i
+    - npm run lint
