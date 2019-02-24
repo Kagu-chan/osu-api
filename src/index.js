@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const bot = require('./bot/bot');
 
 bot.doConnect(process.env.BOT_TOKEN);
