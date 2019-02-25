@@ -1,4 +1,4 @@
 module.exports = (bot, error) => {
-  console.error(error);
+  console.log('[ERROR]', error);
 };
 module.exports.namespace = 'logging';

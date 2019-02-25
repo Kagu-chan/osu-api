@@ -2,7 +2,7 @@ module.exports = {
   command: 'unload-command',
   usage: 'Type `$$unload-command COMMAND_NAME` to unload a text command definition',
   restricted: true,
-  action(bot, message, cmdPath, command) {
+  action(bot, scope, message, cmdPath, command) {
     const com = bot.commands[command];
     if (!com || com.cmdPath !== cmdPath) {
       return `Could not find command \`${cmdPath}/${process.env.BOT_COMMAND_PREFIX}${command}\``;

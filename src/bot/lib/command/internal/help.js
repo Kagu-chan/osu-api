@@ -6,7 +6,7 @@ module.exports = {
   command: 'help',
   usage: 'Type `$$help [COMMAND]` to get help for the command.\n\nType `$$help` to see this message.',
   restricted: false,
-  action(bot, message, command) {
+  action(bot, scope, message, command) {
     if (command) {
       const commandObject = bot.commands[command];
 

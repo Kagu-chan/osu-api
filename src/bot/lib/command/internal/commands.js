@@ -4,14 +4,14 @@ module.exports = {
   command: 'commands',
   restricted: false,
   usage: 'Type `$$commands` to get a list of commands available for you',
-  action(bot, message) {
+  action(bot, scope, message) {
     const result = [
       '```',
       'Available commands:',
     ];
 
     result.push(_.chain(bot.commands)
-      .filter(cmd => !cmd.restricted)
+      .filter(cmd => !cmd.restricted && !cmd.private)
       .map(cmd => `  ${cmd.command}`)
       .value());
 
@@ -19,7 +19,7 @@ module.exports = {
       result.push(['', 'Restricted commands:']);
 
       result.push(_.chain(bot.commands)
-        .filter(cmd => cmd.restricted)
+        .filter(cmd => cmd.restricted && !cmd.private)
         .map(cmd => `  ${cmd.command}`)
         .value());
     }

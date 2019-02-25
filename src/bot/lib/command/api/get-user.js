@@ -9,7 +9,7 @@ module.exports = {
 * event_days => How old should last user events be? Range 1 - 31, default 1
 \`\`\`
 `,
-  action(bot, message, user, ...args) {
+  action(bot, scope, message, user, ...args) {
     const endPoint = 'get_user';
     const data = {
       u: user,

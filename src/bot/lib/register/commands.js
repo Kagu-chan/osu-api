@@ -10,4 +10,6 @@ module.exports = (bot) => {
   bot.registerCommand('restricted', 'reload-command');
   bot.registerCommand('restricted', 'reload');
   bot.registerCommand('restricted', 'unload-command');
+  bot.registerCommand('private', 'not-found');
+  bot.registerCommand('private', 'not-allowed');
 };

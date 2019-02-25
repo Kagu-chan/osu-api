@@ -4,7 +4,7 @@ module.exports = {
   command: 'load-command',
   usage: 'Type `$$load-command COMMAND_NAME` to load a text command definition',
   restricted: true,
-  action(bot, message, cmdPath, command) {
+  action(bot, scope, message, cmdPath, command) {
     if (bot.commands[command]) {
       return `Command \`${process.env.BOT_COMMAND_PREFIX}${command}\` is already loaded. Unload or reload instead!`;
     }

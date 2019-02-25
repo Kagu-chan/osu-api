@@ -14,6 +14,7 @@ loadModule(bot, 'handle/api-request');
 loadModule(bot, 'handle/message');
 
 loadModule(bot, 'parse/arguments');
+loadModule(bot, 'parse/message');
 
 loadModule(bot, 'do/connect');
 loadModule(bot, 'do/send');
@@ -32,6 +33,8 @@ loadModule(bot, 'event/message');
 loadModule(bot, 'register/events');
 loadModule(bot, 'register/command');
 loadModule(bot, 'register/commands');
+
+loadModule(bot, 'log/error');
 
 _.assign(bot, {
   client: bot.getClient(),
