@@ -4,6 +4,7 @@ module.exports = (bot) => {
   bot.registerCommand('internal', 'docs');
   bot.registerCommand('internal', 'help');
   bot.registerCommand('internal', 'mods');
+  bot.registerCommand('internal', 'ping');
   bot.registerCommand('restricted', 'channels');
   bot.registerCommand('restricted', 'load-command');
   bot.registerCommand('restricted', 'reload-command');
