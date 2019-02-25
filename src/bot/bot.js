@@ -12,8 +12,10 @@ loadModule(bot, 'get/bot-channels');
 loadModule(bot, 'get/api-response');
 
 loadModule(bot, 'handle/api-request');
+loadModule(bot, 'handle/message');
 
 loadModule(bot, 'parse/arguments');
+loadModule(bot, 'parse/message');
 
 loadModule(bot, 'do/connect');
 loadModule(bot, 'do/send');
