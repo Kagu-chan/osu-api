@@ -1,37 +1,37 @@
 /* eslint-disable global-require */
 const _ = require('lodash');
 
+const loadModule = require('./helper/load-module');
+
 const bot = {};
 
-_.assign(bot, {
-  getClient: require('./lib/get/client').bind(undefined, bot),
-  getGuilds: require('./lib/get/guilds').bind(undefined, bot),
-  getChannels: require('./lib/get/channels').bind(undefined, bot),
-  getBotChannels: require('./lib/get/bot-channels').bind(undefined, bot),
-  getApiReponse: require('./lib/get/api-response').bind(undefined, bot),
+loadModule(bot, 'get/client');
+loadModule(bot, 'get/guilds');
+loadModule(bot, 'get/channels');
+loadModule(bot, 'get/bot-channels');
+loadModule(bot, 'get/api-response');
 
-  handleApiRequest: require('./lib/handle/api-request').bind(undefined, bot),
+loadModule(bot, 'handle/api-request');
 
-  parseArguments: require('./lib/parse/arguments').bind(undefined, bot),
+loadModule(bot, 'parse/arguments');
 
-  doConnect: require('./lib/do/connect').bind(undefined, bot),
-  doSend: require('./lib/do/send').bind(undefined, bot),
+loadModule(bot, 'do/connect');
+loadModule(bot, 'do/send');
 
-  eventReady: require('./lib/event/ready').bind(undefined, bot),
+loadModule(bot, 'event/ready');
 
-  eventChannelCreate: require('./lib/event/channel/create').bind(undefined, bot),
-  eventChannelDelete: require('./lib/event/channel/delete').bind(undefined, bot),
-  eventChannelUpdate: require('./lib/event/channel/update').bind(undefined, bot),
+loadModule(bot, 'event/channel/create');
+loadModule(bot, 'event/channel/delete');
+loadModule(bot, 'event/channel/update');
 
-  eventGuildCreate: require('./lib/event/guild/create').bind(undefined, bot),
-  eventGuildDelete: require('./lib/event/guild/delete').bind(undefined, bot),
+loadModule(bot, 'event/guild/create');
+loadModule(bot, 'event/guild/delete');
 
-  eventMessage: require('./lib/event/message').bind(undefined, bot),
+loadModule(bot, 'event/message');
 
-  registerEvents: require('./lib/register/events').bind(undefined, bot),
-  registerCommand: require('./lib/register/command').bind(undefined, bot),
-  registerCommands: require('./lib/register/commands').bind(undefined, bot),
-});
+loadModule(bot, 'register/events');
+loadModule(bot, 'register/command');
+loadModule(bot, 'register/commands');
 
 _.assign(bot, {
   client: bot.getClient(),
