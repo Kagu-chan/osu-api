@@ -1,4 +1,5 @@
 module.exports = (bot) => {
+  bot.registerCommand('api', 'get-beatmaps');
   bot.registerCommand('api', 'get-user');
   bot.registerCommand('internal', 'commands');
   bot.registerCommand('internal', 'docs');

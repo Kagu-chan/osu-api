@@ -44,6 +44,6 @@ module.exports = (bot, message) => Promise.try(() => {
   }
 
   command.promiseAction(bot, parsedData, message, ...commandArguments)
-    .then(data => bot.doSend(message.channel, data));
+    .then(data => data && bot.doSend(message.channel, data));
 })
   .catch(bot.logging.logError);
