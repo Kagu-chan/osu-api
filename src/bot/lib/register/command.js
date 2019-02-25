@@ -16,5 +16,5 @@ module.exports = (bot, cmdPath, command) => {
     [command]: commandObject,
   });
 
-  console.log(`Registered command ${cmdPath}/${command}`);
+  bot.logging.logInfo(`Registered command ${cmdPath}/${command}`);
 };

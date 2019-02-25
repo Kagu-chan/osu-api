@@ -8,7 +8,7 @@ module.exports = (bot) => {
       _.assign(bot, {
         botChannels: _.filter(bot.botChannels, ch => ch.id !== channel.id),
       });
-      console.log(`Unregistering deleted channel ${channel.name} on ${channel.guild.name}`);
+      bot.logging.logInfo(`Unregistering deleted channel ${channel.name} on ${channel.guild.name}`);
     }
   });
 };

@@ -10,6 +10,6 @@ module.exports = (bot) => {
       botChannels: channels,
     });
 
-    console.log(`Left guild ${guild.name} - channels removed`);
+    bot.logging.logInfo(`Left guild ${guild.name} - channels removed`);
   });
 };

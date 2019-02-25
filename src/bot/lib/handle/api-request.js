@@ -7,7 +7,7 @@ module.exports = (bot, channel, endPoint, data, ...args) => {
         '```',
       ]);
     })
-    .catch(console.log);
+    .catch(bot.logging.logError);
 
   return false;
 };

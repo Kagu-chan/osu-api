@@ -19,6 +19,6 @@ module.exports = (bot) => {
       botChannels: _.flatten(allChannels),
     });
 
-    console.log(`Joined guild ${guild.name} - channels updated`);
+    bot.logging.logInfo(`Joined guild ${guild.name} - channels updated`);
   });
 };

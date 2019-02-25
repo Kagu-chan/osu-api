@@ -35,6 +35,7 @@ loadModule(bot, 'register/command');
 loadModule(bot, 'register/commands');
 
 loadModule(bot, 'log/error');
+loadModule(bot, 'log/info');
 
 _.assign(bot, {
   client: bot.getClient(),

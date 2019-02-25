@@ -15,7 +15,7 @@ module.exports = {
 
     const msg = `Unloaded command \`${process.env.BOT_COMMAND_PREFIX}${command}\``;
 
-    console.log(msg);
+    bot.logging.logInfo(msg);
     return msg;
   },
 };

@@ -4,7 +4,7 @@ const help = msg => msg.replace(/\$\$/g, process.env.BOT_COMMAND_PREFIX);
 
 module.exports = {
   command: 'help',
-  usage: 'Type `$$help [COMMAND]` to get help for the command.\n\nType `$$help` to see this message.',
+  usage: 'Type `$$help [COMMAND]` to get help for the command.\n\nType `$$help` to see this message.\nType `$$commands` to see a list of commands',
   restricted: false,
   action(bot, scope, message, command) {
     if (command) {

@@ -14,18 +14,18 @@ module.exports = (bot) => {
           botChannels: _.filter(bot.botChannels, ch => ch.id !== oldChannel.id),
         });
         bot.botChannels.push(newChannel);
-        console.log(`Replacing updated channel ${newChannel.name} on ${newChannel.guild.name} (was ${oldChannel.name})`);
+        bot.logging.logInfo(`Replacing updated channel ${newChannel.name} on ${newChannel.guild.name} (was ${oldChannel.name})`);
       } else {
         // We're listeing to this channel and if is not longer our businness
         _.assign(bot, {
           botChannels: _.filter(bot.botChannels, ch => ch.id !== oldChannel.id),
         });
-        console.log(`Removing updated channel ${newChannel.name} on ${newChannel.guild.name} (was ${oldChannel.name})`);
+        bot.logging.logInfo(`Removing updated channel ${newChannel.name} on ${newChannel.guild.name} (was ${oldChannel.name})`);
       }
     } else if (newChannel.type === 'text' && match) {
       // We're not listeing to this channel => ADD
       bot.botChannels.push(newChannel);
-      console.log(`Adding updated channel ${newChannel.name} on ${newChannel.guild.name} (was ${oldChannel.name})`);
+      bot.logging.logInfo(`Adding updated channel ${newChannel.name} on ${newChannel.guild.name} (was ${oldChannel.name})`);
     }
   });
 };
