@@ -9,7 +9,7 @@ module.exports = {
       return `Command \`${process.env.BOT_COMMAND_PREFIX}${command}\` is already loaded. Unload or reload instead!`;
     }
 
-    if (cmdPath && command && FS.existsSync(`src/bot/command/${cmdPath}/${command}.js`)) {
+    if (cmdPath && command && FS.existsSync(`src/bot/lib/command/${cmdPath}/${command}.js`)) {
       bot.registerCommand(cmdPath, command);
 
       return `Loaded command \`${cmdPath}/${process.env.BOT_COMMAND_PREFIX}${command}\``;
