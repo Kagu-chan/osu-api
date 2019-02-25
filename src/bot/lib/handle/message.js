@@ -43,4 +43,4 @@ module.exports = (bot, receivedMessage) => Promise.try(() => {
     receivedMessage.channel.send(result);
   }
 })
-  .catch(bot.logError);
+  .catch(bot.logging.logError);
