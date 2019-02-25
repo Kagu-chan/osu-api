@@ -6,7 +6,17 @@ module.exports = (bot, subPath) => {
   const fnPath = path.join(__dirname, '..', 'lib', subPath);
   const fn = require(fnPath); // eslint-disable-line global-require, import/no-dynamic-require
 
-  _.assign(bot, {
+  let target = bot;
+
+  if (fn.namespace) {
+    target = _.get(bot, fn.namespace, false);
+    if (!target) {
+      _.set(bot, fn.namespace, {});
+      target = _.get(bot, fn.namespace);
+    }
+  }
+
+  _.assign(target, {
     [fnName]: fn.bind(undefined, bot),
   });
 };
