@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 const _ = require('lodash');
 
 const loadModule = require('./helper/load-module');
@@ -15,7 +14,6 @@ loadModule(bot, 'handle/api-request');
 loadModule(bot, 'handle/message');
 
 loadModule(bot, 'parse/arguments');
-loadModule(bot, 'parse/message');
 
 loadModule(bot, 'do/connect');
 loadModule(bot, 'do/send');
@@ -41,4 +39,3 @@ _.assign(bot, {
 });
 
 module.exports = bot;
-/* eslint-enable global-require */
