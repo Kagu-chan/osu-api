@@ -20,7 +20,7 @@ loadModule(bot, 'parse/message');
 loadModule(bot, 'do/connect');
 loadModule(bot, 'do/send');
 
-loadModule(bot, 'event/ready');
+loadModule(bot, 'fetch/channels');
 
 loadModule(bot, 'event/channel/create');
 loadModule(bot, 'event/channel/delete');

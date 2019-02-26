@@ -1,6 +1,4 @@
 module.exports = (bot) => {
-  bot.eventReady();
-
   bot.eventChannelCreate();
   bot.eventChannelDelete();
   bot.eventChannelUpdate();
