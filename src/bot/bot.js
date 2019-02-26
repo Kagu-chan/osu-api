@@ -1,6 +1,7 @@
 const _ = require('lodash');
 
 const loadModule = require('./helper/load-module');
+const initialize = require('./helper/initialize');
 
 const bot = {};
 
@@ -38,6 +39,7 @@ loadModule(bot, 'log/error');
 loadModule(bot, 'log/info');
 
 _.assign(bot, {
+  initialize,
   client: bot.getClient(),
   commands: {},
 });

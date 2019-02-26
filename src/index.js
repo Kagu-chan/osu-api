@@ -1,9 +1,6 @@
 const bot = require('./bot/bot');
 
-bot.doConnect(process.env.BOT_TOKEN);
-
-bot.registerEvents();
-bot.registerCommands();
+bot.initialize(bot);
 
 bot.client.on('error', (err) => {
   console.log('[ERROR]', 'Caught socket exception:\n', `${err.name}\n${err.message}\n${err.stack}`); // eslint-disable-line no-console
