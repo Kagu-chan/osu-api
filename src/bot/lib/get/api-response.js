@@ -16,7 +16,9 @@ module.exports = (bot, endpoint, data, ...args) => {
   });
 
   const finalUrl = urlBuilder.join('&');
+
   const prom = new Promise((resolve, reject) => {
+    bot.logging.logInfo('Retrieve API response for', finalUrl);
     https.get(finalUrl, (resp) => {
       let responseData = '';
 
@@ -27,7 +29,8 @@ module.exports = (bot, endpoint, data, ...args) => {
         resolve(responseData);
       });
     }).on('error', reject);
-  });
+  })
+    .catch(() => bot.logging.logError('API failure'));
 
   return prom;
 };

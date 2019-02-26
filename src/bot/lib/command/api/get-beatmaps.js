@@ -14,7 +14,7 @@ module.exports = {
 * limit     => amount of results. Optional, default and maximum are 500.
 \`\`\`
 `,
-  action(bot, scope, message, user, ...args) {
+  action(bot, scope, message, ...args) {
     const endPoint = 'get_beatmaps';
     const data = {};
 

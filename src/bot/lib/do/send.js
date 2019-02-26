@@ -2,10 +2,22 @@ const _ = require('lodash');
 const Promise = require('bluebird');
 
 module.exports = (bot, channel, message) => Promise.try(() => {
-  if (_.isArray(channel)) {
-    _.each(channel, ch => ch.send(message));
-  } else {
-    channel.send(message);
-  }
+  const channels = _.isArray(channel) ? channel : [channel];
+  const messages = _.isArray(message) ? message : [message];
+
+  const promises = _.flatten(
+    _.map(
+      channels,
+      ch => _.map(
+        messages,
+        msg => ch.send.bind(ch, msg)
+      )
+    )
+  );
+
+  return Promise.each(promises, prom => prom.call().then(() => new Promise((resolve) => {
+    // wait 100 MS after each message
+    setTimeout(resolve, 250);
+  })), { concurrency: 1 });
 })
-  .catch(bot.logging.logError);
+  .catch(err => bot.logging.logError(err));
