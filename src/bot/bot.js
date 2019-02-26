@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
-const loadModule = require('./helper/load-module');
-const initialize = require('./helper/initialize');
+const loadModule = require('./core/load-module');
+const initialize = require('./core/initialize');
 
 const bot = {};
 
@@ -17,7 +17,6 @@ loadModule(bot, 'handle/message');
 loadModule(bot, 'parse/arguments');
 loadModule(bot, 'parse/message');
 
-loadModule(bot, 'do/connect');
 loadModule(bot, 'do/send');
 
 loadModule(bot, 'fetch/channels');
