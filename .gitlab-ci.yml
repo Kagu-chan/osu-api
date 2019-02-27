@@ -5,8 +5,9 @@ cache:
     - node_modules/
 
 lint:
+  image: node:10
   tags:
-    - node-10
+    - node-8
   script:
     - npm i
     - npm run lint
