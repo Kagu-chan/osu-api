@@ -9,7 +9,7 @@ module.exports = (bot, message) => {
   const isDm = type === 'dm';
 
   const channelId = channel.id;
-  const knownChannel = _.find(botChannels, ch => ch.id === channelId);
+  const knownChannel = botChannels[channelId];
 
   const commandArguments = content.replace(process.env.BOT_COMMAND_PREFIX, '').split(' ');
   const commandName = commandArguments.shift();

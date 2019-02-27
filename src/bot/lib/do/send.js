@@ -16,7 +16,7 @@ module.exports = (bot, channel, message) => Promise.try(() => {
   );
 
   return Promise.each(promises, prom => prom.call().then(() => new Promise((resolve) => {
-    // wait 100 MS after each message
+    // wait 250 MS after each message
     setTimeout(resolve, 250);
   })), { concurrency: 1 });
 })

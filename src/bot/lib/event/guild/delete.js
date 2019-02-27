@@ -4,10 +4,8 @@ module.exports = (bot) => {
   const { client } = bot;
 
   client.on('guildDelete', (guild) => {
-    const channels = bot.botChannels.filter(channel => channel.guild.id !== guild.id);
-
     _.assign(bot, {
-      botChannels: channels,
+      botChannels: _.omitBy(bot.botChannels, channel => channel.guild.id !== guild.id),
     });
 
     bot.logging.logInfo(`Left guild ${guild.name} - channels removed`);

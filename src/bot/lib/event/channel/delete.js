@@ -4,11 +4,13 @@ module.exports = (bot) => {
   const { client } = bot;
 
   client.on('channelDelete', (channel) => {
-    if (channel.type === 'text' && channel.name.match(process.env.BOT_CHANNEL_REGEX)) {
+    const { botChannels } = bot;
+
+    if (botChannels[channel.id]) {
       _.assign(bot, {
-        botChannels: _.filter(bot.botChannels, ch => ch.id !== channel.id),
+        botChannels: _.omit(bot.botChannels, channel.id),
       });
-      bot.logging.logInfo(`Unregistering deleted channel ${channel.name} on ${channel.guild.name}`);
+      bot.logging.logInfo(`Removing deleted channel ${channel.name} on ${channel.guild.name}`);
     }
   });
 };

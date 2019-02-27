@@ -5,7 +5,7 @@ module.exports = (bot) => {
     botChannels: bot.getBotChannels(),
   });
 
-  bot.botChannels.forEach((channel) => {
+  _.each(bot.botChannels, (channel) => {
     bot.logging.logInfo(`Attached to ${channel.name} on ${channel.guild.name}`);
   });
 };

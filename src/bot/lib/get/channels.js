@@ -1,1 +1,1 @@
-module.exports = (bot, guild) => guild.channels;
+module.exports = (bot, guild) => guild.channels.array();

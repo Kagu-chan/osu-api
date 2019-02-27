@@ -5,18 +5,15 @@ module.exports = (bot) => {
 
   client.on('guildCreate', (guild) => {
     const channels = bot.getChannels(guild);
-    const allChannels = [
-      bot.botChannels,
-      channels.filter((channel) => {
-        const { type, name } = channel;
-        if (type !== 'text') return false;
+    const newChannels = _.filter(
+      channels,
+      channel => channel.type === 'text' && channel.name.match(process.env.BOT_CHANNEL_REGEX)
+    );
 
-        return name.match(process.env.BOT_CHANNEL_REGEX);
-      }).array(),
-    ];
-
-    _.assign(bot, {
-      botChannels: _.flatten(allChannels),
+    _.each(newChannels, (channel) => {
+      _.assign(bot.botChannels, {
+        [channel.id]: channel,
+      });
     });
 
     bot.logging.logInfo(`Joined guild ${guild.name} - channels updated`);
