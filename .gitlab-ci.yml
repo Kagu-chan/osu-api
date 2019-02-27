@@ -6,7 +6,7 @@ cache:
 
 lint:
   tags:
-    - node-8
+    - node-10
   script:
     - npm i
     - npm run lint
