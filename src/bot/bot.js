@@ -14,6 +14,7 @@ loadModule(bot, 'get/api-response');
 loadModule(bot, 'handle/api-request');
 loadModule(bot, 'handle/message');
 
+loadModule(bot, 'parse/named-parameters');
 loadModule(bot, 'parse/arguments');
 loadModule(bot, 'parse/message');
 

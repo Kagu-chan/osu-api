@@ -11,8 +11,10 @@ module.exports = (bot, message) => {
   const channelId = channel.id;
   const knownChannel = botChannels[channelId];
 
-  const commandArguments = content.replace(process.env.BOT_COMMAND_PREFIX, '').split(' ');
-  const commandName = commandArguments.shift();
+  const {
+    commandName,
+    commandArguments,
+  } = bot.parseArguments(content.replace(process.env.BOT_COMMAND_PREFIX, ''));
 
   const command = _.get(commands, commandName, bot.commands['not-found']);
   const { restricted } = command;

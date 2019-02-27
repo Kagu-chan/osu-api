@@ -7,7 +7,7 @@ module.exports = (bot, endpoint, data, ...args) => {
     url,
   ];
 
-  bot.parseArguments(data, ...args);
+  bot.parseNamedParameters(data, ...args);
 
   _.forEach(data, (value, key) => {
     if (value !== undefined) {
