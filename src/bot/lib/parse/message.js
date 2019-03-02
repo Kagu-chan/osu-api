@@ -33,6 +33,7 @@ module.exports = (bot, message) => {
     command,
     restricted,
 
+    author,
     userName: author.username,
     userId: author.id,
     allowRestricted,

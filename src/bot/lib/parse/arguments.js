@@ -13,8 +13,7 @@ const parseArguments = (str) => {
   const args = [];
 
   // This regular expression finds quoted arguments, but skips \\" inside this strings
-  // eslint-disable-next-line
-  const quotedArguments = str.match(/(?<!\\)"(((\\"|[^ "])+\s?)+)"/g)
+  const quotedArguments = str.match(/(?<!\\)"(((\\"|[^ "])+\s?)+)"/g);
 
   // auxiliary string where we perform transformations
   let argStr = str;
