@@ -1,0 +1,15 @@
+{
+  "0.1.0": "",
+  "0.2.0": [
+    "* Added osu!ping command",
+    "* Added osu!get-beatmaps api command",
+    "* Implemented message chunks - messages over 20 chunks (40K characters) will not be sent",
+    "* Improved parameter parsing - command arguments can now contain spaces - escape with \\ or put into \"quotation marks\"",
+    "* Added release notes command for administrators",
+    "* Added maintenance message command for administrators",
+    "* Moved administrative commands to DM channel",
+    "* Let the bot reconnect on connection failure or after environment downtime",
+    "* Improved bot logging - absolutely no private data will be logged except attempts to use administrative commands",
+    "* Improved bot stability"
+  ]
+}

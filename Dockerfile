@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:10
 
 RUN set -x \
 	rm -rf /var/lib/apt/lists/*
@@ -9,7 +9,6 @@ ENV NODE_ENV production
 ARG BOT_TOKEN
 ARG BOT_CHANNEL_REGEX
 ARG BOT_COMMAND_PREFIX
-ARG BOT_NAME
 ARG BOT_OWNER
 ARG API_KEY
 ARG API_URL

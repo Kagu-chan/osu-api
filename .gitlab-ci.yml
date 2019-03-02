@@ -5,6 +5,7 @@ cache:
     - node_modules/
 
 lint:
+  image: node:10
   tags:
     - node-8
   script:
