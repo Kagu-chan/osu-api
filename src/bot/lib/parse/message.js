@@ -2,7 +2,8 @@ const _ = require('lodash');
 
 module.exports = (bot, message) => {
   const { client, botChannels, commands } = bot;
-  const { content, author, type, channel } = message;
+  const { content, author, channel } = message;
+  const { type } = channel;
 
   const isMessageFromBot = author === client.user;
   const isDirectedToBot = content.startsWith(process.env.BOT_COMMAND_PREFIX);

@@ -14,7 +14,7 @@ module.exports = {
         return 'You\'re not permitted to use this command!';
       }
 
-      if (commandObject) {
+      if (commandObject && (commandObject.restricted && scope.isDm)) {
         if (_.isString(commandObject.usage)) {
           return help(commandObject.usage);
         }

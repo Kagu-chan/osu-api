@@ -15,7 +15,7 @@ module.exports = {
       .map(cmd => `  ${cmd.command}`)
       .value());
 
-    if (message.author.id === process.env.BOT_OWNER) {
+    if (message.author.id === process.env.BOT_OWNER && scope.isDm) {
       result.push(['', 'Restricted commands:']);
 
       result.push(_.chain(bot.commands)

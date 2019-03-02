@@ -1,6 +1,6 @@
 const Promise = require('bluebird');
 
-module.exports = (bot, message) => Promise.try(() => {
+module.exports = (bot, message) => Promise.try(async () => {
   const parsedData = bot.parseMessage(message);
 
   const {
@@ -40,6 +40,11 @@ module.exports = (bot, message) => Promise.try(() => {
     if (!allowRestricted) {
       bot.logging.logInfo('User was not permitted to use the command...');
       command = bot.commands['not-allowed'];
+    } else if (!isDm) {
+      bot.logging.logInfo('User posted restricted command via channel');
+      command = bot.commands['not-found'];
+
+      await message.author.send('Restricted commands should be directed to the bot directly');
     }
   }
 
