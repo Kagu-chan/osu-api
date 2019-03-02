@@ -8,13 +8,14 @@ module.exports = {
   usage: 'Type `$$release` to send a release note message to **ALL servers**',
   async action(bot) {
     const channels = bot.botChannels;
-    const version = (await FS.readFileAsync('VERSION')).toString();
+    const packageJson = (await FS.readFileAsync('package.json')).toString();
     const versions = (await FS.readFileAsync('RELEASE.json')).toString();
-    const currentVersionText = JSON.parse(versions)[version];
+    const currentVersion = JSON.parse(packageJson).version;
+    const currentVersionText = JSON.parse(versions)[currentVersion];
 
     await bot.doSend(
       _.values(channels),
-      `**BOT UPDATED!** New version is *v${version}*\n\`\`\`${currentVersionText.join('\n')}\`\`\``
+      `**BOT UPDATED!** New version is *v${currentVersion}*\n\`\`\`${currentVersionText.join('\n')}\`\`\``
     );
 
     return 'Message sent to all listening channels';
