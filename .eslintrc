@@ -1,6 +1,9 @@
 {
   "root": true,
   "extends": "airbnb-base",
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
   "rules": {
     "comma-dangle": ["error", {
       "arrays": "always-multiline",
