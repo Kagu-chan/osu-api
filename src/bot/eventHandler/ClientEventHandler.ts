@@ -19,6 +19,7 @@ export default class ClientEventHandler extends EventHandler {
     client.on('logout', this.onLogout);
     client.on('loginFailed', this.onLoginFailed.bind(this));
     client.on('loginLimitsExceed', this.onLoginLimitsExceed);
+    client.on('ready', this.onReady);
   }
 
   /**
@@ -43,6 +44,8 @@ export default class ClientEventHandler extends EventHandler {
   private onLogin(sender: Client) {
     const botUser = sender.getBotUser();
     Logger.info(`Logged in as ${botUser.tag}`);
+
+    sender.notify('ready');
   }
 
   /**
@@ -83,5 +86,17 @@ export default class ClientEventHandler extends EventHandler {
   private onLoginLimitsExceed(sender: Client, error: Error) {
     Logger.error('Login attempts limit exceed: ', error);
     process.exit(1);
+  }
+
+  /**
+   * Handle ready state
+   *
+   * @param {Client} sender event sender
+   */
+  private onReady(sender: Client) {
+    // Call `getRelevantDiscordChannels` once to cache its result
+    sender.getRelevantDiscordChannels();
+
+    Logger.info('Ready to handle events...');
   }
 }
