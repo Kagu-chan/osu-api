@@ -67,18 +67,22 @@ export default class Client {
     }
 
     try {
+      // Wait for the discord login
       await this.client.login(this.configuration.discordToken);
 
+      // Call the given callback when the login was successfull
       return callback();
     } catch (error) {
       this.bot.logError('Failed to login:', error);
 
+      // Retry if the limit of retries not exceed
       if (retryAttempt < this.configuration.discordRetryAttemps) {
         this.bot.logInfo(`Login attempted again in ${retryTimeout}`);
 
         await this.bot.wait(retryTimeout * 1000);
         await this.login(callback, retryAttempt + 1);
       } else {
+        // Login was not possible
         throw error;
       }
     }
