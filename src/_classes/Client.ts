@@ -1,7 +1,9 @@
 import {
   Client as DiscordClient,
+  TextChannel,
   User,
-  Snowflake
+  Snowflake,
+  Message,
 } from 'discord.js';
 import { Bot } from '../classes';
 import { IDiscordConfiguration } from '../interfaces';
@@ -71,6 +73,23 @@ export default class Client {
    */
   public isOnline(): boolean {
     return this.client.status === 0
+  }
+
+  /**
+   * Send message(s) to users or channels
+   *
+   * @param {Array<TextChannel | User>} channel Users or channels to send messages to
+   * @param message One or more messages to send
+   */
+  public async sendMessage(
+    channel: Array<TextChannel | User>,
+    message: string | string[]
+  ): Promise<(Message | Message[])[]> {
+    // Chain channels into a promise array...
+    const senders = channel.map(ch => ch.send(message));
+
+    // ... to wait for them to be sent
+    return await Promise.all(senders);
   }
 
   /**
