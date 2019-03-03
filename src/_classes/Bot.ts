@@ -1,5 +1,5 @@
 import { IConfiguration } from './../interfaces';
-import { BotEventLifeCycle, Client, Process } from '../classes';
+import { BotEventHandler, Client, Process } from '../classes';
 
 /**
  * @class Bot
@@ -13,7 +13,7 @@ export default class Bot {
   /**
    * @var {BotLifetime} botLifetime The bot event life cycle
    */
-  private readonly botEventLifeCycle: BotEventLifeCycle;
+  private readonly botEventLifeCycle: BotEventHandler;
 
   /**
    * @var {Process} process The process mapper instance
@@ -33,7 +33,7 @@ export default class Bot {
     });
 
     this.process = new Process(this);
-    this.botEventLifeCycle = new BotEventLifeCycle(this.client);
+    this.botEventLifeCycle = new BotEventHandler(this.client);
 
     this.client.on('login', this.onClientLogin.bind(this));
   }

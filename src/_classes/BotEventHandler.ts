@@ -1,6 +1,6 @@
 import { Client } from '../classes';
 
-export default class BotEventLifeCycle {
+export default class BotEventHandler {
   client: Client;
 
   constructor(client: Client) {
