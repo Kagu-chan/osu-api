@@ -1,6 +1,6 @@
 import EventHandler from './EventHandler';
-import Client from './Client';
-import Logger from './Logger';
+import Client from '../Client';
+import Logger from '../Logger';
 
 /**
  * @inheritdoc

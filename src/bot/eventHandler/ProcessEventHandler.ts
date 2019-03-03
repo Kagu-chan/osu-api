@@ -1,5 +1,5 @@
 import EventHandler from './EventHandler';
-import Logger from './Logger';
+import Logger from '../Logger';
 
 /**
  * @inheritdoc

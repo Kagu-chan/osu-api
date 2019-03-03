@@ -6,7 +6,7 @@ import {
   Message,
 } from 'discord.js';
 import Bot from './Bot';
-import EventNotifier from './EventNotifier';
+import EventEmitter from './EventEmitter';
 import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
 
 /**
@@ -15,7 +15,7 @@ import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
  * @class Client
  * @extens EventEmitter
  */
-export default class Client extends EventNotifier {
+export default class Client extends EventEmitter {
   /**
    * @var {DiscordClient} client A discord.js Client instance used for this bot
    * @private
@@ -137,7 +137,6 @@ export default class Client extends EventNotifier {
    * @see IDiscordConfiguration.discordRetryTimeout
    */
   public async login(retryAttempt?: number): Promise<void> {
-    const retryTimeout: number = this.configuration.discordRetryTimeout;
     const attempt = retryAttempt || 0;
 
     this.emit('beforeLogin', this, attempt);

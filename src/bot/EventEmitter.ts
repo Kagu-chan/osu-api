@@ -1,6 +1,6 @@
-import { EventEmitter } from "events";
+import { EventEmitter as NodeEventEmitter } from "events";
 
-export default abstract class EventNotifier extends EventEmitter {
+export default abstract class EventEmitter extends NodeEventEmitter {
   /**
    * Emit an event, but attach a sender argument to the event
    *

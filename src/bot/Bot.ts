@@ -1,5 +1,5 @@
-import ClientEventHandler from './ClientEventHandler';
-import ProcessEventHandler from './ProcessEventHandler';
+import ClientEventHandler from './eventHandler/ClientEventHandler';
+import ProcessEventHandler from './eventHandler/ProcessEventHandler';
 import Client from './Client';
 import IConfiguration from './interfaces/IConfiguration';
 
