@@ -1,7 +1,8 @@
 import ClientEventHandler from './eventHandler/ClientEventHandler';
+import DiscordEventHandler from './eventHandler/DiscordEventHandler';
 import ProcessEventHandler from './eventHandler/ProcessEventHandler';
-import Client from './Client';
 import IConfiguration from './interfaces/IConfiguration';
+import Client from './Client';
 
 /**
  * @class Bot
@@ -16,6 +17,11 @@ export default class Bot {
    * @var {ClientEventHandler} clientEventHandler
    */
   private readonly clientEventHandler: ClientEventHandler;
+
+  /**
+   * @var {DiscordEventHandler} discordEventHandler
+   */
+  private readonly discordEventHandler: DiscordEventHandler;
 
   /**
    * @var {ProcessEventHandler} processEventHandler
@@ -35,11 +41,13 @@ export default class Bot {
     });
 
     this.clientEventHandler = new ClientEventHandler(this);
+    this.discordEventHandler = new DiscordEventHandler(this);
     this.processEventHandler = new ProcessEventHandler(this);
   }
 
   public initialize(): void {
     this.clientEventHandler.registerEvents();
+    this.discordEventHandler.registerEvents();
     this.processEventHandler.registerEvents();
   }
 
