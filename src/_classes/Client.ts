@@ -80,6 +80,16 @@ export default class Client extends EventEmitter {
   }
 
   /**
+   * Attach an event handler to the discord client api
+   * @param {string} eventName The event name
+   * @param {any} scope The handler scope
+   * @param {Function} handler The event handler
+   */
+  public attachEvent(eventName: string, scope: any, handler: Function) {
+    this.client.on(eventName, handler);
+  }
+
+  /**
    * Send message(s) to users or channels
    *
    * @param {Array<TextChannel | User>} channel Users or channels to send messages to
