@@ -11,6 +11,7 @@ import {
 import Bot from './Bot';
 import EventEmitter from './EventEmitter';
 import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
+import DiscordEvent from './eventHandler/discordEvent/DiscordEvent';
 
 /**
  * Representation of a discord connection and its client interface
@@ -110,10 +111,7 @@ export default class Client extends EventEmitter {
         const channels: Collection<Snowflake, GuildChannel> = guild.channels;
 
         channels.forEach((channel: GuildChannel, channelId: Snowflake) => {
-          if (
-            channel.type === 'text'
-            && channel.name.match(/dev/)
-          ) {
+          if (this.isChannelRelevant(channel)) {
             this.relevantChannels.set(channelId, channel as TextChannel);
           }
         }, this);
@@ -123,6 +121,10 @@ export default class Client extends EventEmitter {
     return this.relevantChannels;
   }
 
+  public isChannelRelevant(channel: GuildChannel): boolean {
+    return channel.type === 'text' && !!channel.name.match(/dev/);
+  }
+
   /**
    * Checks wether the bot is online or not
    *
@@ -130,17 +132,34 @@ export default class Client extends EventEmitter {
    * @see <@link https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L249>
    */
   public isOnline(): boolean {
-    return this.client.status === 0
+    return this.client.status === 0;
   }
 
   /**
    * Attach an event handler to the discord client api
-   * @param {string} eventName The event name
-   * @param {any} scope The handler scope
-   * @param {Function} handler The event handler
+   *
+   * @param {type} type The generic type
+   * @returns {T extends DiscordEvent} The discord event instance
+   * @template T
    */
-  public attachEvent(eventName: string, scope: any, handler: Function) {
-    this.client.on(eventName, handler);
+  public attachEvent<T extends DiscordEvent>(type: { new (c: Client): T; }): T {
+    const eventInstance = new type(this);
+    this.emit('registerEvent', this, eventInstance.eventName);
+
+    this.client.on(eventInstance.eventName, (...args: any) => {
+      eventInstance.handler(...args);
+    });
+
+    return eventInstance;
+  }
+
+  /**
+   * Attach a discord channel manually
+   *
+   * @param {TextChannel} channel The channel
+   */
+  public attachChannel(channel: TextChannel) {
+    this.relevantChannels.set(channel.id, channel);
   }
 
   /**

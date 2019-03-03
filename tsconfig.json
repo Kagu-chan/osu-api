@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "allowJs": true,
     "moduleResolution": "node",
     "module": "commonjs",
     "target": "es2018",
     "types": ["node", "discord.js"],
-    "experimentalDecorators": true,
     "inlineSourceMap": true
   },
   "include": [

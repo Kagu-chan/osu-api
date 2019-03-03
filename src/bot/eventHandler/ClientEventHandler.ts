@@ -19,6 +19,7 @@ export default class ClientEventHandler extends EventHandler {
     client.on('logout', this.onLogout);
     client.on('loginFailed', this.onLoginFailed.bind(this));
     client.on('loginLimitsExceed', this.onLoginLimitsExceed);
+    client.on('registerEvent', this.onRegisterEvent);
     client.on('ready', this.onReady);
   }
 
@@ -86,6 +87,10 @@ export default class ClientEventHandler extends EventHandler {
   private onLoginLimitsExceed(sender: Client, error: Error) {
     Logger.error('Login attempts limit exceed: ', error);
     process.exit(1);
+  }
+
+  private onRegisterEvent(sender: Client, eventName: string) {
+    Logger.info(`Attached to discord event [${eventName}]`);
   }
 
   /**
