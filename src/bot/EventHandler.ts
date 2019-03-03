@@ -1,7 +1,7 @@
-import { Bot } from "../classes";
+import Bot from "./Bot";
 
 /**
- * Event Handler base class
+ * Event Handler class
  *
  * @class EventHandler
  * @abstract
@@ -17,5 +17,8 @@ export default abstract class EventHandler {
     this.bot = bot;
   }
 
+  /**
+   * Register specific events directed to the type of this event handler
+   */
   public abstract registerEvents(): void;
 }

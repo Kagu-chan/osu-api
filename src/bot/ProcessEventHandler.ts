@@ -1,35 +1,17 @@
-import { EventHandler } from '../classes';
+import EventHandler from './EventHandler';
+import Logger from './Logger';
 
 /**
- * Class to wrap the nodejs process
- *
- * This class is meant to handle with process wide events
- *
- * @class Process
+ * @inheritdoc
+ * @class ProcessEventHandler
  */
 export default class ProcessEventHandler extends EventHandler {
   /**
-   * Register specific events to the node process
-   *
-   * @event process/beforeExit
+   * @inheritdoc
    * @event process/uncaughtException
    */
   public registerEvents() {
-    process.on('beforeExit', this.onBeforeExit);
-    process.on('uncaughtException', this.onUncaughtException);
-  }
-
-  /**
-   * Logout before doing a graceful exit
-   *
-   * @param {number} statusCode The status code - if `0`, then it is a default sigterm or process queue empty
-   * @see <@link https://nodejs.org/api/process.html#process_event_beforeexit>
-   */
-  private async onBeforeExit(statusCode: number) {
-    if (statusCode === 0) {
-      this.bot.logInfo('Logout...');
-      await this.bot.client.logout();
-    }
+    process.on('uncaughtException', this.onUncaughtException.bind(this));
   }
 
   /**
@@ -48,7 +30,7 @@ export default class ProcessEventHandler extends EventHandler {
     let user;
     let userMessage;
 
-    this.bot.logError(
+    Logger.error(
       'Caught unhandled exception:\n',
       `${name}\n${message}\n${stack}`
     );
@@ -76,7 +58,7 @@ export default class ProcessEventHandler extends EventHandler {
         await this.bot.client.sendMessage([user], userMessage);
       } catch (err) {
         // Unable to send message to the owner user
-        this.bot.logError(err);
+        Logger.error(err);
       }
     }
   }

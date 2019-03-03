@@ -5,9 +5,9 @@ import {
   Snowflake,
   Message,
 } from 'discord.js';
-import { Bot } from '../classes';
-import { IDiscordConfiguration } from '../interfaces';
-import { EventEmitter } from 'events';
+import Bot from './Bot';
+import EventNotifier from './EventNotifier';
+import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
 
 /**
  * Representation of a discord connection and its client interface
@@ -15,7 +15,7 @@ import { EventEmitter } from 'events';
  * @class Client
  * @extens EventEmitter
  */
-export default class Client extends EventEmitter {
+export default class Client extends EventNotifier {
   /**
    * @var {DiscordClient} client A discord.js Client instance used for this bot
    * @private
@@ -58,6 +58,19 @@ export default class Client extends EventEmitter {
    */
   public getUser(id: string | Snowflake): Promise<User> {
     return this.client.fetchUser(id, true);
+  }
+
+  /**
+   * Get the bot user if logged in
+   *
+   * @returns {User}
+   * @see <@link https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=user>
+   */
+  public getBotUser(): User {
+    if (this.isOnline()) {
+      return this.client.user;
+    }
+    return undefined;
   }
 
   /**
@@ -116,22 +129,18 @@ export default class Client extends EventEmitter {
    *
    * @param {numer} [retryAttempt=0] The current retry attempt. Defaults to 0
    * @returns {Promise<void>}
-   * @event login
-   * @throws {Error} An error will be thrown if a login is not possible
+   * @emits beforeLogin(sender: Client, retry: number)
+   * @emits login(sender: Client)
+   * @emits loginFailed(sender: Client, error: Error, retryAttempt: number, attemptsToMade: number, attemptTimeout: number)
    *
    * @see IDiscordConfiguration.discordRetryAttemps
    * @see IDiscordConfiguration.discordRetryTimeout
    */
   public async login(retryAttempt?: number): Promise<void> {
     const retryTimeout: number = this.configuration.discordRetryTimeout;
+    const attempt = retryAttempt || 0;
 
-    if (!retryAttempt) {
-      this.bot.logInfo('Login...');
-
-      retryAttempt = 0;
-    } else {
-      this.bot.logInfo(`Login... (retry: ${retryAttempt})`);
-    }
+    this.emit('beforeLogin', this, attempt);
 
     try {
       // Wait for the discord login
@@ -140,18 +149,7 @@ export default class Client extends EventEmitter {
       // We're logged in - tell the world so
       this.emit('login', this);
     } catch (error) {
-      this.bot.logError('Failed to login:', error);
-
-      // Retry if the limit of retries not exceed
-      if (retryAttempt < this.configuration.discordRetryAttemps) {
-        this.bot.logInfo(`Login attempted again in ${retryTimeout}`);
-
-        await this.bot.wait(retryTimeout * 1000);
-        await this.login(retryAttempt + 1);
-      } else {
-        // Login was not possible
-        throw error;
-      }
+      this.emit('loginFailed', this, error, attempt, this.configuration.discordRetryAttemps, this.configuration.discordRetryTimeout);
     }
   }
 
@@ -162,5 +160,7 @@ export default class Client extends EventEmitter {
    */
   public async logout(): Promise<void> {
     await this.client.destroy();
+
+    this.emit('logout');
   }
 }

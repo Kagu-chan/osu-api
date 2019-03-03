@@ -1,4 +1,4 @@
-import { Bot } from './classes';
+import Bot from './bot/Bot';
 
 const bot: Bot = new Bot({
   discordLoginToken: process.env.DISCORD_LOGIN_TOKEN,
