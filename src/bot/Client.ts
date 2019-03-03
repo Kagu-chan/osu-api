@@ -4,6 +4,9 @@ import {
   User,
   Snowflake,
   Message,
+  Collection,
+  Guild,
+  GuildChannel,
 } from 'discord.js';
 import Bot from './Bot';
 import EventEmitter from './EventEmitter';
@@ -35,6 +38,12 @@ export default class Client extends EventEmitter {
    * @private
    */
   private bot: Bot;
+
+  /**
+   * @var {Collection<Snowflake, TextChannel>} relevantChannels Cached relevant bot channels
+   * @private
+   */
+  private relevantChannels: Collection<Snowflake, TextChannel>;
 
   /**
    * @constructor
@@ -80,6 +89,38 @@ export default class Client extends EventEmitter {
    */
   public getOwner(): Promise<User> {
     return this.getUser(this.configuration.discordOwnerId);
+  }
+
+  /**
+   * Fetch relevant discord channels
+   *
+   * Channels are cached upon methods calls
+   * A channels is considered as relevant, it its name corresponds to the bot configuration
+   *
+   * @param {boolean} [refetch=false] Refetch channels or use cache
+   * @returns {Collection<Snowflake, TextChannel>} The channels relevant for the bot
+   */
+  public getRelevantDiscordChannels(refetch?: boolean): Collection<Snowflake, TextChannel> {
+    const guilds: Collection<Snowflake, Guild> = this.client.guilds
+
+    if (refetch || !this.relevantChannels) {
+      this.relevantChannels = new Collection<Snowflake, TextChannel>();
+
+      guilds.forEach((guild: Guild) => {
+        const channels: Collection<Snowflake, GuildChannel> = guild.channels;
+
+        channels.forEach((channel: GuildChannel, channelId: Snowflake) => {
+          if (
+            channel.type === 'text'
+            && channel.name.match(/dev/)
+          ) {
+            this.relevantChannels.set(channelId, channel as TextChannel);
+          }
+        }, this);
+      }, this);
+    }
+
+    return this.relevantChannels;
   }
 
   /**
