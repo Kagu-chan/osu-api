@@ -6,7 +6,6 @@ import { IDiscordConfiguration } from '../interfaces';
  * Representation of a discord connection and its client interface
  *
  * @class Client
- * @since 0.3.0
  */
 export default class Client {
   /**
@@ -14,24 +13,18 @@ export default class Client {
    * @private
    *
    * @see <@link https://discord.js.org/#/docs/main/stable/class/Client>
-   *
-   * @since 0.3.0
    */
   private client: DiscordClient;
 
   /**
    * @var {IDiscordConfiguration} configuration discord related configuration
    * @private
-   *
-   * @since 0.3.0
    */
   private configuration: IDiscordConfiguration;
 
   /**
    * @var {Bot} bot The bot instance
    * @private
-   *
-   * @since 0.3.0
    */
   private bot: Bot;
 
@@ -61,8 +54,6 @@ export default class Client {
    *
    * @see IDiscordConfiguration.discordRetryAttemps
    * @see IDiscordConfiguration.discordRetryTimeout
-   *
-   * @since 0.3.0
    */
   public async login(callback: () => Promise<void>, retryAttempt?: number): Promise<void> {
     const retryTimeout: number = this.configuration.discordRetryTimeout;
@@ -97,8 +88,6 @@ export default class Client {
    * Logs out from Discord
    *
    * @returns {Promise<void>}
-   *
-   * @since 0.3.0
    */
   public async logout(): Promise<void> {
     await this.client.destroy();

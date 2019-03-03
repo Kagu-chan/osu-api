@@ -5,21 +5,15 @@ import { IConfiguration } from './../interfaces';
 
 /**
  * @class Bot
- *
- * @since 0.3.0
  */
 export default class Bot {
   /**
    * @var {Client} client The discord client
-   *
-   * @since 0.3.0
    */
   public readonly client: Client;
 
   /**
    * @var {Process} process The process mapper instance
-   *
-   * @since 0.3.0
    */
   private process: Process;
 
@@ -46,8 +40,6 @@ export default class Bot {
    * Log a message to the console and prefix with `INFO`
    *
    * @param {message: any[]} message The log message
-   *
-   * @since 0.3.0
    */
   public logInfo(...message: any) {
     console.log('[INFO]', ...message);
@@ -57,8 +49,6 @@ export default class Bot {
    * Log a message to the console and prefix with `ERROR`
    *
    * @param {message: any[]} message The log message
-   *
-   * @since 0.3.0
    */
   public logError(...message: any) {
     console.log('[ERROR]', ...message);
@@ -69,8 +59,6 @@ export default class Bot {
    *
    * @param {number} milliseconds The timeout time
    * @returns {Promise<void>}
-   *
-   * @since 0.3.0
    */
   public wait(milliseconds: number): Promise<void> {
     return new Promise((resolve) => {
@@ -83,8 +71,6 @@ export default class Bot {
    *
    * @note This method may exit the process in case of connection issues
    * @returns {Promise<void>}
-   *
-   * @since 0.3.0
    */
   public async run(): Promise<void> {
     try {
@@ -100,8 +86,6 @@ export default class Bot {
    *
    * @note This method may exit the process in case of unhandled exception
    * @returns {Promise<void>}
-   *
-   * @since 0.3.0
    */
   private async startInternalProcesses(): Promise<void> {
     try {
