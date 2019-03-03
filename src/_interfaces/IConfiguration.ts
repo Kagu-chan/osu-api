@@ -1,3 +1,5 @@
 export default interface IConfiguration {
-  discordToken: string
+  discordToken: string,
+  discordRetryTimeout: number,
+  discordRetryAttemps: number
 }
