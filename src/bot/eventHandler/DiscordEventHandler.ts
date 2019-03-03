@@ -1,5 +1,6 @@
 import EventHandler from "./EventHandler";
 import ChannelCreateEvent from "./discordEvent/ChannelCreateEvent";
+import ChannelDeleteEvent from "./discordEvent/ChannelDeleteEvent";
 
 /**
  * @inheritdoc
@@ -12,5 +13,6 @@ export default class DiscordEventHandler extends EventHandler {
    */
   public registerEvents() {
     this.bot.client.attachEvent(ChannelCreateEvent);
+    this.bot.client.attachEvent(ChannelDeleteEvent);
   }
 }

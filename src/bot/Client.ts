@@ -142,6 +142,16 @@ export default class Client extends EventEmitter {
   }
 
   /**
+   * Checks if a channel is considered as relevant
+   *
+   * @param {Snowflake} channelId The channel id
+   * @returns {boolean}
+   */
+  public hasChannel(channelId: Snowflake): boolean {
+    return this.relevantChannels.has(channelId);
+  }
+
+  /**
    * Attach an event handler to the discord client api
    *
    * @param {type} type The generic type
@@ -166,6 +176,15 @@ export default class Client extends EventEmitter {
    */
   public attachChannel(channel: TextChannel) {
     this.relevantChannels.set(channel.id, channel);
+  }
+
+  /**
+   * Detach a registered channel
+   *
+   * @param {TextChannel} channel The channel to remove
+   */
+  public detachChannel(channel: TextChannel) {
+    this.relevantChannels.delete(channel.id);
   }
 
   /**
