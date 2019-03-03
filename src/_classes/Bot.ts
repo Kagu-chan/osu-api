@@ -30,6 +30,8 @@ export default class Bot {
     });
 
     this.process = new Process(this);
+
+    this.client.on('login', this.onClientLogin.bind(this));
   }
 
   public initialize(): void {
@@ -75,7 +77,7 @@ export default class Bot {
    */
   public async run(): Promise<void> {
     try {
-      await this.client.login(this.startInternalProcesses);
+      await this.client.login();
     } catch (error) {
       this.logError('Connection failure - retry limits exceed: Exit process');
       process.exit(1);
@@ -83,16 +85,26 @@ export default class Bot {
   }
 
   /**
-   * Startup internal processes like message handling and so on
+   * Event handler for login. Start internal processes
    *
    * @note This method may exit the process in case of unhandled exception
    * @returns {Promise<void>}
    */
-  private async startInternalProcesses(): Promise<void> {
+  private async onClientLogin(sender: Client): Promise<void> {
+    console.log('C');
     try {
       // @TODO
+      await this.client.sendMessage(
+        [await this.client.getOwner()],
+        'Hallo'
+      );
     } catch (error) {
       this.logError('Unhandled exception - exit process:', error);
+
+      if (this.client.isOnline()) {
+        await this.client.logout();
+      }
+
       process.exit(1);
     }
   }

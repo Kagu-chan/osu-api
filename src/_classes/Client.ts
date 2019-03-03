@@ -7,13 +7,15 @@ import {
 } from 'discord.js';
 import { Bot } from '../classes';
 import { IDiscordConfiguration } from '../interfaces';
+import { EventEmitter } from 'events';
 
 /**
  * Representation of a discord connection and its client interface
  *
  * @class Client
+ * @extens EventEmitter
  */
-export default class Client {
+export default class Client extends EventEmitter {
   /**
    * @var {DiscordClient} client A discord.js Client instance used for this bot
    * @private
@@ -40,6 +42,8 @@ export default class Client {
    * @param {IDiscordConfiguration} configuration The discord configuration
    */
   constructor(bot: Bot, configuration: IDiscordConfiguration) {
+    super();
+
     this.bot = bot;
     this.client = new DiscordClient();
     this.configuration = configuration;
@@ -100,15 +104,15 @@ export default class Client {
    *
    * @note A login can take place multiple times, e.g. doing a reconnect
    *
-   * @param {() => Promise<void>} callback The action to do after login.
    * @param {numer} [retryAttempt=0] The current retry attempt. Defaults to 0
    * @returns {Promise<void>}
+   * @event login
    * @throws {Error} An error will be thrown if a login is not possible
    *
    * @see IDiscordConfiguration.discordRetryAttemps
    * @see IDiscordConfiguration.discordRetryTimeout
    */
-  public async login(callback: () => Promise<void>, retryAttempt?: number): Promise<void> {
+  public async login(retryAttempt?: number): Promise<void> {
     const retryTimeout: number = this.configuration.discordRetryTimeout;
 
     if (!retryAttempt) {
@@ -123,8 +127,8 @@ export default class Client {
       // Wait for the discord login
       await this.client.login(this.configuration.discordToken);
 
-      // Call the given callback when the login was successfull
-      return callback();
+      // We're logged in - tell the world so
+      this.emit('login', this);
     } catch (error) {
       this.bot.logError('Failed to login:', error);
 
@@ -133,7 +137,7 @@ export default class Client {
         this.bot.logInfo(`Login attempted again in ${retryTimeout}`);
 
         await this.bot.wait(retryTimeout * 1000);
-        await this.login(callback, retryAttempt + 1);
+        await this.login(retryAttempt + 1);
       } else {
         // Login was not possible
         throw error;
