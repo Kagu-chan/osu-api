@@ -1,4 +1,8 @@
-import { Client as DiscordClient } from 'discord.js';
+import {
+  Client as DiscordClient,
+  User,
+  Snowflake
+} from 'discord.js';
 import { Bot } from '../classes';
 import { IDiscordConfiguration } from '../interfaces';
 
@@ -37,6 +41,26 @@ export default class Client {
     this.bot = bot;
     this.client = new DiscordClient();
     this.configuration = configuration;
+  }
+
+  /**
+   * Fetch an user from discord
+   *
+   * @param {string | Snowflake} id Discord user id
+   * @returns {Promise<User>}
+   * @see <@link https://discord.js.org/#/docs/main/stable/class/Client?scrollTo=fetchUser>
+   */
+  public getUser(id: string | Snowflake): Promise<User> {
+    return this.client.fetchUser(id, true);
+  }
+
+  /**
+   * Fetch the bot owner user from discord
+   *
+   * @returns {Promise<User>}
+   */
+  public getOwner(): Promise<User> {
+    return this.getUser(this.configuration.discordOwnerId);
   }
 
   /**

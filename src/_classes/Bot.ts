@@ -25,14 +25,15 @@ export default class Bot {
     this.client = new Client(this, {
       discordToken: configuration.discordToken,
       discordRetryAttemps: configuration.discordRetryAttemps,
-      discordRetryTimeout: configuration.discordRetryTimeout
+      discordRetryTimeout: configuration.discordRetryTimeout,
+      discordOwnerId: configuration.discordOwnerId
     });
 
-    this.process = new Process();
+    this.process = new Process(this);
   }
 
   public initialize(): void {
-    this.process.registerEvents(this);
+    this.process.registerEvents();
     console.log('do stuff...');
   }
 

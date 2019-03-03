@@ -9,25 +9,83 @@ import Bot from './Bot';
  */
 export default class Process {
   /**
-   * Register specific events to the node process
-   *
-   * @param {Bot} bot The bot instance
-   * @event process/beforeExit
-   * @event process/uncaughtException
+   * @var {Bot} bot The bot instance
    */
-  public registerEvents(bot: Bot) {
-    process.on('beforeExit', this.onBeforeExit.bind(this, bot));
+  private bot: Bot;
+
+  /**
+   * @constructor
+   * @param {Bot} bot The bot instance
+   */
+  constructor(bot: Bot) {
+    this.bot = bot;
   }
 
   /**
-   * 
-   * @param bot 
-   * @param statusCode 
+   * Register specific events to the node process
+   *
+   * @event process/beforeExit
+   * @event process/uncaughtException
    */
-  private async onBeforeExit(bot: Bot, statusCode: number) {
+  public registerEvents() {
+    process.on('beforeExit', this.onBeforeExit);
+    process.on('uncaughtException', this.onUncaughtException);
+  }
+
+  /**
+   * Logout before doing a graceful exit
+   *
+   * @param {number} statusCode The status code - if `0`, then it is a default sigterm or process queue empty
+   * @see <@link https://nodejs.org/api/process.html#process_event_beforeexit>
+   */
+  private async onBeforeExit(statusCode: number) {
     if (statusCode === 0) {
-      bot.logInfo('Logout...');
-      await bot.client.logout();
+      this.bot.logInfo('Logout...');
+      await this.bot.client.logout();
+    }
+  }
+
+  /**
+   * Handle uncaught exceptions
+   * @param {Error} error The thrown error
+   * @ee <@link https://nodejs.org/api/process.html#process_event_uncaughtexception>
+   */
+  private async onUncaughtException(error: Error) {
+    const { client } = this.bot;
+    const {
+      name,
+      message,
+      stack
+    } = error;
+
+    let user;
+
+    this.bot.logError(
+      'Caught unhandled exception:\n',
+      `${name}\n${message}\n${stack}`
+    );
+
+    // If the client is already online, we want to inform the owner user
+    if (client && client.isOnline()) {
+      user = await this.bot.client.getOwner();
+
+      // If the user is not found, cancel
+      if (!user) {
+        return;
+      }
+      try {
+        user.send([
+          'Caught unhandled exception:',
+          '```',
+          `Name:    ${name}`,
+          `Message: ${message}`,
+          `Stack:   ${stack}`,
+          '```'
+        ].join('\n'));
+      } catch (err) {
+        // Unable to send message to the owner user
+        this.bot.logError(err);
+      }
     }
   }
 }

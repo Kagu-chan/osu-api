@@ -6,5 +6,6 @@
 export default interface IDiscordConfiguration {
   discordToken: string,
   discordRetryTimeout: number,
-  discordRetryAttemps: number
+  discordRetryAttemps: number,
+  discordOwnerId: string
 }

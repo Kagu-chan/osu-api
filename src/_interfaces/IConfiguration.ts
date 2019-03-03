@@ -15,5 +15,12 @@ export default interface IConfiguration {
   /**
    * @var {number} discordRetryTimeout Amount of login attempts before failing with an error
    */
-  discordRetryAttemps: number
+  discordRetryAttemps: number,
+
+  /**
+   * The root administrator user
+   *
+   * @var {string} discordOwnerId The discord bot owner id
+   */
+  discordOwnerId: string
 }
