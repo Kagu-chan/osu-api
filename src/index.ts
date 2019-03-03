@@ -7,14 +7,4 @@ const bot: Bot = new Bot({
 });
 
 bot.initialize();
-
-async function doStuff() {
-  await bot.client.login(() => {
-    return new Promise((resolve) => {
-      resolve();
-    });
-  });
-  await bot.client.logout();
-}
-
-doStuff();
+bot.run();

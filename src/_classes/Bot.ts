@@ -1,4 +1,5 @@
 import Client from './Client';
+import Process from './Process';
 
 import { IConfiguration } from './../interfaces';
 
@@ -16,6 +17,13 @@ export default class Bot {
   public readonly client: Client;
 
   /**
+   * @var {Process} process The process mapper instance
+   *
+   * @since 0.3.0
+   */
+  private process: Process;
+
+  /**
    * @constructor
    * @param {IConfiguration} configuration The bot configuration
    */
@@ -25,9 +33,12 @@ export default class Bot {
       discordRetryAttemps: configuration.discordRetryAttemps,
       discordRetryTimeout: configuration.discordRetryTimeout
     });
+
+    this.process = new Process();
   }
 
   public initialize(): void {
+    this.process.registerEvents(this);
     console.log('do stuff...');
   }
 
@@ -88,6 +99,9 @@ export default class Bot {
    * Startup internal processes like message handling and so on
    *
    * @note This method may exit the process in case of unhandled exception
+   * @returns {Promise<void>}
+   *
+   * @since 0.3.0
    */
   private async startInternalProcesses(): Promise<void> {
     try {
