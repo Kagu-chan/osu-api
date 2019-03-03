@@ -4,7 +4,7 @@
  * @see IConfiguration
  */
 export default interface IDiscordConfiguration {
-  discordToken: string,
+  discordLoginToken: string,
   discordRetryTimeout: number,
   discordRetryAttemps: number,
   discordOwnerId: string

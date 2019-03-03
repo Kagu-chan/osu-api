@@ -3,9 +3,9 @@
  */
 export default interface IConfiguration {
   /**
-   * @var {string} discordToken Discord token to log in
+   * @var {string} discordLoginToken Discord token to log in
    */
-  discordToken: string,
+  discordLoginToken: string,
 
   /**
    * @var {number} discordRetryTimeout Timeout between login retries

@@ -26,7 +26,7 @@ export default class Bot {
    */
   constructor(configuration: IConfiguration) {
     this.client = new Client(this, {
-      discordToken: configuration.discordToken,
+      discordLoginToken: configuration.discordLoginToken,
       discordRetryAttemps: configuration.discordRetryAttemps,
       discordRetryTimeout: configuration.discordRetryTimeout,
       discordOwnerId: configuration.discordOwnerId

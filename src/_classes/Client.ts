@@ -135,7 +135,7 @@ export default class Client extends EventEmitter {
 
     try {
       // Wait for the discord login
-      await this.client.login(this.configuration.discordToken);
+      await this.client.login(this.configuration.discordLoginToken);
 
       // We're logged in - tell the world so
       this.emit('login', this);

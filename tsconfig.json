@@ -2,8 +2,12 @@
   "compilerOptions": {
     "outDir": "./dist",
     "allowJs": true,
-    "target": "es5",
-    "types": ["node", "discord.js"]
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es2018",
+    "types": ["node", "discord.js"],
+    "experimentalDecorators": true,
+    "inlineSourceMap": true
   },
   "include": [
     "./src/**/*"
