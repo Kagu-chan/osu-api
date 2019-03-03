@@ -59,6 +59,7 @@ export default class Process {
     } = error;
 
     let user;
+    let userMessage;
 
     this.bot.logError(
       'Caught unhandled exception:\n',
@@ -73,15 +74,19 @@ export default class Process {
       if (!user) {
         return;
       }
+
+      // Compose user message with proper formatting
+      userMessage = [
+        'Caught unhandled exception:',
+        '```',
+        `Name:    ${name}`,
+        `Message: ${message}`,
+        `Stack:   ${stack}`,
+        '```'
+      ].join('\n');
+
       try {
-        user.send([
-          'Caught unhandled exception:',
-          '```',
-          `Name:    ${name}`,
-          `Message: ${message}`,
-          `Stack:   ${stack}`,
-          '```'
-        ].join('\n'));
+        await this.bot.client.sendMessage([user], userMessage);
       } catch (err) {
         // Unable to send message to the owner user
         this.bot.logError(err);
