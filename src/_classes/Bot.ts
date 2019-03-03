@@ -1,7 +1,5 @@
-import Client from './Client';
-import Process from './Process';
-
 import { IConfiguration } from './../interfaces';
+import { BotLifetime, Client, Process } from '../classes';
 
 /**
  * @class Bot
@@ -11,6 +9,11 @@ export default class Bot {
    * @var {Client} client The discord client
    */
   public readonly client: Client;
+
+  /**
+   * @var {BotLifetime} botLifetime The bot event lifetime
+   */
+  private readonly botLifetime: BotLifetime;
 
   /**
    * @var {Process} process The process mapper instance
@@ -30,6 +33,7 @@ export default class Bot {
     });
 
     this.process = new Process(this);
+    this.botLifetime = new BotLifetime(this.client);
 
     this.client.on('login', this.onClientLogin.bind(this));
   }
