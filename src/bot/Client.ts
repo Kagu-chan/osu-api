@@ -17,7 +17,7 @@ import DiscordEvent from './eventHandler/discordEvent/DiscordEvent';
  * Representation of a discord connection and its client interface
  *
  * @class Client
- * @extens EventEmitter
+ * @extends EventEmitter
  */
 export default class Client extends EventEmitter {
   /**
