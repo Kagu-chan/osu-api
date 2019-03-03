@@ -40,6 +40,16 @@ export default class Client {
   }
 
   /**
+   * Checks wether the bot is online or not
+   *
+   * @returns {boolean}
+   * @see <@link https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L249>
+   */
+  public isOnline(): boolean {
+    return this.client.status === 0
+  }
+
+  /**
    * Logs in into Discord.
    * 
    * If a login fails, it retries it several times. Between the retries,
