@@ -1,5 +1,5 @@
 import { IConfiguration } from './../interfaces';
-import { BotEventHandler, Client, Process } from '../classes';
+import { BotEventHandler, Client, ProcessEventHandler } from '../classes';
 
 /**
  * @class Bot
@@ -11,14 +11,14 @@ export default class Bot {
   public readonly client: Client;
 
   /**
-   * @var {BotLifetime} botLifetime The bot event life cycle
+   * @var {BotEventHandler} botEventHandler The bot event life cycle
    */
-  private readonly botEventLifeCycle: BotEventHandler;
+  private readonly botEventHandler: BotEventHandler;
 
   /**
-   * @var {Process} process The process mapper instance
+   * @var {ProcessEventHandler} processEventHandler The process event handler
    */
-  private process: Process;
+  private processEventHandler: ProcessEventHandler;
 
   /**
    * @constructor
@@ -32,15 +32,14 @@ export default class Bot {
       discordOwnerId: configuration.discordOwnerId
     });
 
-    this.process = new Process(this);
-    this.botEventLifeCycle = new BotEventHandler(this.client);
+    this.processEventHandler = new ProcessEventHandler(this);
+    this.botEventHandler = new BotEventHandler(this.client);
 
     this.client.on('login', this.onClientLogin.bind(this));
   }
 
   public initialize(): void {
-    this.process.registerEvents();
-    console.log('do stuff...');
+    this.processEventHandler.registerEvents();
   }
 
   /**

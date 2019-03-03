@@ -1,4 +1,4 @@
-import { Bot } from '../classes';
+import { EventHandler } from '../classes';
 
 /**
  * Class to wrap the nodejs process
@@ -7,20 +7,7 @@ import { Bot } from '../classes';
  *
  * @class Process
  */
-export default class Process {
-  /**
-   * @var {Bot} bot The bot instance
-   */
-  private bot: Bot;
-
-  /**
-   * @constructor
-   * @param {Bot} bot The bot instance
-   */
-  constructor(bot: Bot) {
-    this.bot = bot;
-  }
-
+export default class ProcessEventHandler extends EventHandler {
   /**
    * Register specific events to the node process
    *
