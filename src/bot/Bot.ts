@@ -32,7 +32,7 @@ export default class Bot {
    * @constructor
    * @param {IConfiguration} configuration The bot configuration
    */
-  constructor(configuration: IConfiguration) {
+  public constructor(configuration: IConfiguration) {
     this.client = new Client(this, {
       discordLoginToken: configuration.discordLoginToken,
       discordRetryAttemps: configuration.discordRetryAttemps,
@@ -45,6 +45,9 @@ export default class Bot {
     this.processEventHandler = new ProcessEventHandler(this);
   }
 
+  /**
+   * Initialize the internal event handlers
+   */
   public initialize(): void {
     this.clientEventHandler.registerEvents();
     this.discordEventHandler.registerEvents();

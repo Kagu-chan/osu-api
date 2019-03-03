@@ -13,6 +13,10 @@ export default abstract class EventHandler {
    */
   protected bot: Bot;
 
+  /**
+   * @param {Bot} bot The bot instance
+   * @constructor
+   */
   public constructor(bot: Bot) {
     this.bot = bot;
   }

@@ -89,6 +89,12 @@ export default class ClientEventHandler extends EventHandler {
     process.exit(1);
   }
 
+  /**
+   * Handle a newly registered event
+   *
+   * @param {Client} sender event sender
+   * @param {string} eventName The event name
+   */
   private onRegisterEvent(sender: Client, eventName: string) {
     Logger.info(`Attached to discord event [${eventName}]`);
   }

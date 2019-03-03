@@ -1,3 +1,6 @@
+/**
+ * @class Logger
+ */
 export default class Logger {
   /**
    * Log a message to the console and prefix with `INFO`

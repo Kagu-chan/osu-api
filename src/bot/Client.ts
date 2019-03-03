@@ -51,7 +51,7 @@ export default class Client extends EventEmitter {
    * @param {Bot} bot The bot instance
    * @param {IDiscordConfiguration} configuration The discord configuration
    */
-  constructor(bot: Bot, configuration: IDiscordConfiguration) {
+  public constructor(bot: Bot, configuration: IDiscordConfiguration) {
     super();
 
     this.bot = bot;
@@ -121,12 +121,18 @@ export default class Client extends EventEmitter {
     return this.relevantChannels;
   }
 
+  /**
+   * Checks whether a channel is relevant or not
+   *
+   * @param {GuildChannel} channel The channel to check
+   * @returns {boolean}
+   */
   public isChannelRelevant(channel: GuildChannel): boolean {
     return channel.type === 'text' && !!channel.name.match(/dev/);
   }
 
   /**
-   * Checks wether the bot is online or not
+   * Checks whether the bot is online or not
    *
    * @returns {boolean}
    * @see <@link https://github.com/discordjs/discord.js/blob/stable/src/util/Constants.js#L249>
