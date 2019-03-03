@@ -94,8 +94,20 @@ export default class ClientEventHandler extends EventHandler {
    * @param {Client} sender event sender
    */
   private onReady(sender: Client) {
-    // Call `getRelevantDiscordChannels` once to cache its result
-    sender.getRelevantDiscordChannels();
+    const channels = sender.getRelevantDiscordChannels();
+
+    channels.forEach((channel, channelId) => {
+      const {
+        name: channelName,
+        guild
+      } = channel;
+      const {
+        name: guildName,
+        id: guildId
+      } = guild;
+
+      Logger.info(`Attached to discord channel [${channelName} (${channelId})] on guild [${guildName} (${guildId})]`);
+    });
 
     Logger.info('Ready to handle events...');
   }
