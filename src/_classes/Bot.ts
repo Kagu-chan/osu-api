@@ -1,5 +1,5 @@
 import { IConfiguration } from './../interfaces';
-import { BotLifetime, Client, Process } from '../classes';
+import { BotEventLifeCycle, Client, Process } from '../classes';
 
 /**
  * @class Bot
@@ -11,9 +11,9 @@ export default class Bot {
   public readonly client: Client;
 
   /**
-   * @var {BotLifetime} botLifetime The bot event lifetime
+   * @var {BotLifetime} botLifetime The bot event life cycle
    */
-  private readonly botLifetime: BotLifetime;
+  private readonly botEventLifeCycle: BotEventLifeCycle;
 
   /**
    * @var {Process} process The process mapper instance
@@ -33,7 +33,7 @@ export default class Bot {
     });
 
     this.process = new Process(this);
-    this.botLifetime = new BotLifetime(this.client);
+    this.botEventLifeCycle = new BotEventLifeCycle(this.client);
 
     this.client.on('login', this.onClientLogin.bind(this));
   }
@@ -95,18 +95,17 @@ export default class Bot {
    * @returns {Promise<void>}
    */
   private async onClientLogin(sender: Client): Promise<void> {
-    console.log('C');
     try {
       // @TODO
-      await this.client.sendMessage(
-        [await this.client.getOwner()],
+      await sender.sendMessage(
+        [await sender.getOwner()],
         'Hallo'
       );
     } catch (error) {
       this.logError('Unhandled exception - exit process:', error);
 
-      if (this.client.isOnline()) {
-        await this.client.logout();
+      if (sender.isOnline()) {
+        await sender.logout();
       }
 
       process.exit(1);

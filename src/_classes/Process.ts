@@ -1,4 +1,4 @@
-import Bot from './Bot';
+import { Bot } from '../classes';
 
 /**
  * Class to wrap the nodejs process

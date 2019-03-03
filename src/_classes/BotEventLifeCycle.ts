@@ -1,6 +1,6 @@
-import Client from './Client';
+import { Client } from '../classes';
 
-export default class BotLifetime {
+export default class BotEventLifeCycle {
   client: Client;
 
   constructor(client: Client) {
