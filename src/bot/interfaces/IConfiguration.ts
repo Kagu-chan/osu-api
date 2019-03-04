@@ -22,5 +22,19 @@ export default interface IConfiguration {
    *
    * @var {string} discordOwnerId The discord bot owner id
    */
-  discordOwnerId: string
+  discordOwnerId: string,
+
+  /**
+   * The regular expression to match for the bot relevant channel names
+   *
+   * @var {string} discordChannelRegexp The regular expression
+   */
+  discordChannelRegexp: string,
+
+  /**
+   * Prefix for bot commands - only required for non-dm-messages
+   *
+   * @var {string} commandPrefix The command prefix
+   */
+  commandPrefix: string
 }

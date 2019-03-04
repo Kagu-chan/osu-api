@@ -43,9 +43,12 @@ export default class Bot {
       discordLoginToken: configuration.discordLoginToken,
       discordRetryAttemps: configuration.discordRetryAttemps,
       discordRetryTimeout: configuration.discordRetryTimeout,
-      discordOwnerId: configuration.discordOwnerId
+      discordOwnerId: configuration.discordOwnerId,
+      discordChannelRegexp: configuration.discordChannelRegexp
     });
-    this.messageParser = new MessageParser();
+    this.messageParser = new MessageParser(this, {
+      commandPrefix: configuration.commandPrefix
+    });
 
     this.clientEventHandler = new ClientEventHandler(this);
     this.discordEventHandler = new DiscordEventHandler(this);

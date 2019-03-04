@@ -24,5 +24,12 @@ export default interface IDiscordConfiguration {
    *
    * @var {string} discordOwnerId The discord bot owner id
    */
-  discordOwnerId: string
+  discordOwnerId: string,
+
+  /**
+   * The regular expression to match for the bot relevant channel names
+   *
+   * @var {string} discordChannelRegexp The regular expression
+   */
+  discordChannelRegexp: string
 }

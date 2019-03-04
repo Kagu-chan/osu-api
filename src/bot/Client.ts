@@ -124,7 +124,7 @@ export default class Client extends EventEmitter {
    * @returns {Collection<string, TextChannel>}
    */
   public getRelevantGuildChannels(guild: Guild): Collection<string, TextChannel> {
-    const channels: Collection<Snowflake, GuildChannel> = guild.channels.filter(this.isChannelRelevant);
+    const channels: Collection<Snowflake, GuildChannel> = guild.channels.filter(this.isChannelRelevant, this);
     const resultChannels: Collection<string, TextChannel> = new Collection<string, TextChannel>();
 
     channels.forEach((channel: GuildChannel, id: Snowflake) => {
@@ -141,7 +141,8 @@ export default class Client extends EventEmitter {
    * @returns {boolean}
    */
   public isChannelRelevant(channel: GuildChannel): boolean {
-    return channel.type === 'text' && !!channel.name.match(/dev/);
+    return channel.type === 'text'
+      && !!channel.name.match(this.configuration.discordChannelRegexp);
   }
 
   /**
