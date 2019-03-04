@@ -3,7 +3,6 @@ import ClientEventHandler from './eventHandler/ClientEventHandler';
 import DiscordEventHandler from './eventHandler/DiscordEventHandler';
 import ProcessEventHandler from './eventHandler/ProcessEventHandler';
 import IConfiguration from './interfaces/IConfiguration';
-import MessageParser from './message/MessageParser';
 
 /**
  * @class Bot
@@ -13,11 +12,6 @@ export default class Bot {
    * @var {Client} client The discord client
    */
   public readonly client: Client;
-
-  /**
-   * @var {MessageParser} messageParser The messsage parser
-   */
-  public readonly messageParser: MessageParser;
 
   /**
    * @var {ClientEventHandler} clientEventHandler
@@ -35,19 +29,23 @@ export default class Bot {
   private readonly processEventHandler: ProcessEventHandler;
 
   /**
+   * @var {IConfiguration} configuration The configuration
+   */
+  private readonly configuration: IConfiguration;
+
+  /**
    * @constructor
    * @param {IConfiguration} configuration The bot configuration
    */
   public constructor(configuration: IConfiguration) {
+    this.configuration = configuration;
+
     this.client = new Client(this, {
       discordLoginToken: configuration.discordLoginToken,
       discordRetryAttemps: configuration.discordRetryAttemps,
       discordRetryTimeout: configuration.discordRetryTimeout,
       discordOwnerId: configuration.discordOwnerId,
       discordChannelRegexp: configuration.discordChannelRegexp,
-    });
-    this.messageParser = new MessageParser(this, {
-      commandPrefix: configuration.commandPrefix,
     });
 
     this.clientEventHandler = new ClientEventHandler(this);
@@ -62,6 +60,16 @@ export default class Bot {
     this.clientEventHandler.registerEvents();
     this.discordEventHandler.registerEvents();
     this.processEventHandler.registerEvents();
+  }
+
+  /**
+   * Get a configuration value
+   *
+   * @param {string} key The key
+   * @returns {string}
+   */
+  public getConfigurationValue(key: string): string {
+    return this.configuration[key] as string;
   }
 
   /**

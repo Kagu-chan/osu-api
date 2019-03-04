@@ -1,5 +1,5 @@
 import { Message as DiscordMessage } from 'discord.js';
-import Message from '../../message/Message';
+import Message from '../../Message';
 import DiscordEvent from './DiscordEvent';
 
 /**
@@ -21,8 +21,16 @@ export default class MessageEvent extends DiscordEvent {
    * @param {Guild} guild The deleted guild
    */
   public handler: (discordMessage: DiscordMessage) => void = (discordMessage: DiscordMessage) => {
-    const message: Message = this.bot.messageParser.parse(discordMessage);
+    const message: Message = Message.fromDiscordMessage(
+      this.client,
+      this.bot.getConfigurationValue('commandPrefix'),
+      discordMessage
+    );
 
-    console.log(message);
+    if (!message.isForBot) {
+      return;
+    }
+
+    message.channel.send(message.content);
   }
 }
