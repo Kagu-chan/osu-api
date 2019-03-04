@@ -1,5 +1,5 @@
-import Client from "../../Client";
-import Bot from "../../Bot";
+import Client from '../../Client';
+import Bot from '../../Bot';
 
 /**
  * Represents an event fired by discord.js

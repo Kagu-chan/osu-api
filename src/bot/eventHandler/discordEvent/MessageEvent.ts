@@ -1,6 +1,6 @@
-import DiscordEvent from "./DiscordEvent";
-import { Message as DiscordMessage } from "discord.js";
-import Message from "../../message/Message";
+import DiscordEvent from './DiscordEvent';
+import { Message as DiscordMessage } from 'discord.js';
+import Message from '../../message/Message';
 
 /**
  * Represents a guild create event

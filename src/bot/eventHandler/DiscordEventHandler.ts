@@ -1,9 +1,9 @@
-import EventHandler from "./EventHandler";
-import ChannelCreateEvent from "./discordEvent/ChannelCreateEvent";
-import ChannelDeleteEvent from "./discordEvent/ChannelDeleteEvent";
-import ChannelUpdateEvent from "./discordEvent/ChannelUpdateEvent";
-import GuildCreateEvent from "./discordEvent/GuildCreateEvent";
-import GuildDeleteEvent from "./discordEvent/GuildDeleteEvent";
+import EventHandler from './EventHandler';
+import ChannelCreateEvent from './discordEvent/ChannelCreateEvent';
+import ChannelDeleteEvent from './discordEvent/ChannelDeleteEvent';
+import ChannelUpdateEvent from './discordEvent/ChannelUpdateEvent';
+import GuildCreateEvent from './discordEvent/GuildCreateEvent';
+import GuildDeleteEvent from './discordEvent/GuildDeleteEvent';
 import MessageEvent from './discordEvent/MessageEvent';
 
 /**

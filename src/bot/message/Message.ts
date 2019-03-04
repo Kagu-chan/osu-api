@@ -1,4 +1,4 @@
-import { TextChannel } from "discord.js";
+import { TextChannel } from 'discord.js';
 
 /**
  * @class Message
@@ -10,7 +10,12 @@ export default class Message {
   public isFromBot: boolean;
 
   /**
-   * @var {boolean} isForBot Is the message directored to the bot?
+   * @var {boolean} isFromAnyBot Is the message sent from any bot?
+   */
+  public isFromAnyBot: boolean;
+
+  /**
+   * @var {boolean} isForBot Is the message directed to the bot?
    */
   public isForBot: boolean;
 

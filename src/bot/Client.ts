@@ -235,7 +235,7 @@ export default class Client extends EventEmitter {
    *
    * @note A login can take place multiple times, e.g. doing a reconnect
    *
-   * @param {numer} [retryAttempt=0] The current retry attempt. Defaults to 0
+   * @param {number} [retryAttempt=0] The current retry attempt. Defaults to 0
    * @returns {Promise<void>}
    * @emits beforeLogin(sender: Client, retry: number)
    * @emits login(sender: Client)

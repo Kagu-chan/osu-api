@@ -1,6 +1,6 @@
-import { Guild, TextChannel } from "discord.js";
-import DiscordEvent from "./DiscordEvent";
-import Logger from "../../Logger";
+import { Guild, TextChannel } from 'discord.js';
+import DiscordEvent from './DiscordEvent';
+import Logger from '../../Logger';
 
 /**
  * Represents a guild create event

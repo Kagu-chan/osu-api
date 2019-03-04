@@ -1,7 +1,7 @@
-import { Message as DiscordMessage, User } from "discord.js";
-import Message from "./Message";
-import Bot from "../Bot";
-import IMessageConfiguration from "../interfaces/IMessageConfiguration";
+import { Message as DiscordMessage, TextChannel, User } from 'discord.js';
+import Bot from '../Bot';
+import IMessageConfiguration from '../interfaces/IMessageConfiguration';
+import Message from './Message';
 
 /**
  * Parser for discord messages
@@ -38,19 +38,31 @@ export default class MessageParser {
   public parse(discordMessage: DiscordMessage): Message {
     const parsedMessage = new Message();
 
-    parsedMessage.isFromBot = this.isFromBot(discordMessage.author);
+    this.setIsFromBot(parsedMessage, discordMessage.author);
+    this.setIsFromAnyBot(parsedMessage, discordMessage.author);
+
     return parsedMessage;
   }
 
   /**
    * Check whether a message comes from the bot or a user
    *
+   * @param {Message} message The message
    * @param {User} user The message author
-   * @returns {boolean}
    */
-  private isFromBot(user: User): boolean {
+  private setIsFromBot(message: Message, user: User) {
     const botUser = this.bot.client.getBotUser();
 
-    return botUser.id === user.id;
+    message.isFromBot = botUser.id === user.id;
+  }
+
+  /**
+   * Check whether a message comes from any bot or not
+   *
+   * @param {Message} message The message
+   * @param {User} user The message author
+   */
+  private setIsFromAnyBot(message: Message, user: User) {
+    message.isFromAnyBot = user.bot;
   }
 }

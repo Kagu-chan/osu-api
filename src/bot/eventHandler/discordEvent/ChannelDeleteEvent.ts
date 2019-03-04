@@ -1,6 +1,6 @@
-import { TextChannel, GuildChannel } from "discord.js";
-import DiscordEvent from "./DiscordEvent";
-import Logger from "../../Logger";
+import { TextChannel, GuildChannel } from 'discord.js';
+import DiscordEvent from './DiscordEvent';
+import Logger from '../../Logger';
 
 /**
  * Represents a channel delete event
