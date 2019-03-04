@@ -171,8 +171,8 @@ export default class Client extends EventEmitter {
    * @returns {T extends DiscordEvent} The discord event instance
    * @template T
    */
-  public attachEvent<T extends DiscordEvent>(type: { new (c: Client): T; }): T {
-    const eventInstance = new type(this);
+  public attachEvent<T extends DiscordEvent>(type: { new (b: Bot): T; }): T {
+    const eventInstance = new type(this.bot);
     this.emit('registerEvent', this, eventInstance.eventName);
 
     this.client.on(eventInstance.eventName, (...args: any) => {

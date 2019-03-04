@@ -1,4 +1,5 @@
 import Client from "../../Client";
+import Bot from "../../Bot";
 
 /**
  * Represents an event fired by discord.js
@@ -9,16 +10,22 @@ import Client from "../../Client";
  */
 export default abstract class DiscordEvent {
   /**
-   * @var {Client} client The client
+   * @var {Bot} bot The bot
    */
-  protected client: Client;
+  protected readonly bot: Bot;
 
   /**
-   * @param {Client} client The client
+   * @var {Client} client The client
+   */
+  protected readonly client: Client;
+
+  /**
+   * @param {Bot} bot The bot
    * @constructor
    */
-  constructor(client: Client) {
-    this.client = client;
+  constructor(bot: Bot) {
+    this.bot = bot;
+    this.client = bot.client;
   }
 
   /**
