@@ -3,6 +3,7 @@ import DiscordEventHandler from './eventHandler/DiscordEventHandler';
 import ProcessEventHandler from './eventHandler/ProcessEventHandler';
 import IConfiguration from './interfaces/IConfiguration';
 import Client from './Client';
+import MessageParser from './message/MessageParser';
 
 /**
  * @class Bot
@@ -12,6 +13,11 @@ export default class Bot {
    * @var {Client} client The discord client
    */
   public readonly client: Client;
+
+  /**
+   * @var {MessageParser} messageParser The messsage parser
+   */
+  public readonly messageParser: MessageParser;
 
   /**
    * @var {ClientEventHandler} clientEventHandler
@@ -39,6 +45,7 @@ export default class Bot {
       discordRetryTimeout: configuration.discordRetryTimeout,
       discordOwnerId: configuration.discordOwnerId
     });
+    this.messageParser = new MessageParser();
 
     this.clientEventHandler = new ClientEventHandler(this);
     this.discordEventHandler = new DiscordEventHandler(this);
