@@ -1,5 +1,7 @@
+import * as _ from 'lodash';
 import EventHandler from './EventHandler';
 import Logger from '../Logger';
+import INodeError from '../interfaces/INodeError';
 
 /**
  * @inheritdoc
@@ -16,23 +18,23 @@ export default class ProcessEventHandler extends EventHandler {
 
   /**
    * Handle uncaught exceptions
-   * @param {Error} error The thrown error
-   * @ee <@link https://nodejs.org/api/process.html#process_event_uncaughtexception>
+   * @param {Error | INodeError} error The thrown error
+   * @see <@link https://nodejs.org/api/process.html#process_event_uncaughtexception>
    */
-  private async onUncaughtException(error: Error) {
+  private async onUncaughtException(error: Error | INodeError) {
     const { client } = this.bot;
     const {
       name,
       message,
       stack
-    } = error;
+    } = _.get(error, 'context.error', error);
 
     let user;
     let userMessage;
 
     Logger.error(
-      'Caught unhandled exception:\n',
-      `${name}\n${message}\n${stack}`
+      `Caught unhandled exception: ${name}\n`,
+      ` ${message}\n  ${stack}`
     );
 
     // If the client is already online, we want to inform the owner user
@@ -56,9 +58,8 @@ export default class ProcessEventHandler extends EventHandler {
 
       try {
         await this.bot.client.sendMessage([user], userMessage);
-      } catch (err) {
-        // Unable to send message to the owner user
-        Logger.error(err);
+      } catch {
+        // NOP - the error is already logged
       }
     }
   }

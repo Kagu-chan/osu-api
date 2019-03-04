@@ -12,7 +12,6 @@ import Bot from './Bot';
 import EventEmitter from './EventEmitter';
 import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
 import DiscordEvent from './eventHandler/discordEvent/DiscordEvent';
-import { stringify } from 'querystring';
 
 /**
  * Representation of a discord connection and its client interface
