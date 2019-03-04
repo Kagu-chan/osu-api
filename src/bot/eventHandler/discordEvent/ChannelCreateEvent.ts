@@ -21,6 +21,14 @@ export default class ChannelCreateEvent extends DiscordEvent {
    * @param {GuildChannel} channel The newly created channel
    */
   public handler: Function = (channel: GuildChannel) => {
+    /**
+     * A private message to the bot bubbles a `channelCreate` first
+     *
+     * Cancel as early as possible because the code below will fail
+     * (A `DMChannel` has no property `name` and therefore can't be destructured with aliasing)
+     */
+    if (channel.type === 'dm') return;
+
     const {
       name: channelName,
       id: channelId,
