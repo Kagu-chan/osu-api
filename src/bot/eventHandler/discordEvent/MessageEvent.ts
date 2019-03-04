@@ -32,8 +32,11 @@ export default class MessageEvent extends DiscordEvent {
       return;
     }
 
-    const command = CommandParser.parseCommand(message);
+    const commandArray = CommandParser.parseCommand(message);
+    const command = commandArray.shift();
 
-    // message.channel.send(message.content);
+    const capitalCommand = command.replace(/^(\w)/, (c) => c.toUpperCase());
+
+    this.bot.commandDispatcher.emit(`command${capitalCommand}`, ...commandArray);
   }
 }

@@ -3,15 +3,16 @@ import Command from './Command';
 import PingCommand from './PingCommand';
 
 export default class CommandParser {
-  public static parseCommand(message: Message): Command {
+  public static parseCommand(message: Message): string[] {
     const { content } = message;
     const [commandName, argumentsString] = this.headTail(content);
     const commandArguments = argumentsString
       ? this.parseArguments(argumentsString)
       : [];
 
-    message.channel.send(commandArguments);
-    return new PingCommand();
+    commandArguments.unshift(commandName);
+
+    return commandArguments;
   }
 
   private static headTail(str: string): string[] {

@@ -1,5 +1,7 @@
+import { EventEmitter } from 'events';
 import Client from './Client';
 import ClientEventHandler from './eventHandler/ClientEventHandler';
+import CommandEventHandler from './eventHandler/CommandEventHandler';
 import DiscordEventHandler from './eventHandler/DiscordEventHandler';
 import ProcessEventHandler from './eventHandler/ProcessEventHandler';
 import IConfiguration from './interfaces/IConfiguration';
@@ -12,6 +14,11 @@ export default class Bot {
    * @var {Client} client The discord client
    */
   public readonly client: Client;
+
+  /**
+   * @var {EventEmitter} commandDispatcher Dispatcher for bot commands
+   */
+  public readonly commandDispatcher: EventEmitter;
 
   /**
    * @var {ClientEventHandler} clientEventHandler
@@ -27,6 +34,11 @@ export default class Bot {
    * @var {ProcessEventHandler} processEventHandler
    */
   private readonly processEventHandler: ProcessEventHandler;
+
+  /**
+   * @var {CommandEventHandler} commandEventHandler
+   */
+  private readonly commandEventHandler: CommandEventHandler;
 
   /**
    * @var {IConfiguration} configuration The configuration
@@ -48,9 +60,12 @@ export default class Bot {
       discordChannelRegexp: configuration.discordChannelRegexp,
     });
 
+    this.commandDispatcher = new EventEmitter();
+
     this.clientEventHandler = new ClientEventHandler(this);
     this.discordEventHandler = new DiscordEventHandler(this);
     this.processEventHandler = new ProcessEventHandler(this);
+    this.commandEventHandler = new CommandEventHandler(this);
   }
 
   /**
@@ -60,6 +75,7 @@ export default class Bot {
     this.clientEventHandler.registerEvents();
     this.discordEventHandler.registerEvents();
     this.processEventHandler.registerEvents();
+    this.commandEventHandler.registerEvents();
   }
 
   /**
