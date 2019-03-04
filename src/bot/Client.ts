@@ -12,6 +12,7 @@ import Bot from './Bot';
 import EventEmitter from './EventEmitter';
 import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
 import DiscordEvent from './eventHandler/discordEvent/DiscordEvent';
+import { stringify } from 'querystring';
 
 /**
  * Representation of a discord connection and its client interface
@@ -108,17 +109,30 @@ export default class Client extends EventEmitter {
       this.relevantChannels = new Collection<Snowflake, TextChannel>();
 
       guilds.forEach((guild: Guild) => {
-        const channels: Collection<Snowflake, GuildChannel> = guild.channels;
+        const channels: Collection<Snowflake, TextChannel> = this.getRelevantGuildChannels(guild);
 
-        channels.forEach((channel: GuildChannel, channelId: Snowflake) => {
-          if (this.isChannelRelevant(channel)) {
-            this.relevantChannels.set(channelId, channel as TextChannel);
-          }
-        }, this);
+        this.attachChannels(channels);
       }, this);
     }
 
     return this.relevantChannels;
+  }
+
+  /**
+   * Fetch relevant channels from a guild
+   *
+   * @param {Guild} guild The guild
+   * @returns {Collection<string, TextChannel>}
+   */
+  public getRelevantGuildChannels(guild: Guild): Collection<string, TextChannel> {
+    const channels: Collection<Snowflake, GuildChannel> = guild.channels.filter(this.isChannelRelevant);
+    const resultChannels: Collection<string, TextChannel> = new Collection<string, TextChannel>();
+
+    channels.forEach((channel: GuildChannel, id: Snowflake) => {
+      resultChannels.set(id, channel as TextChannel);
+    });
+
+    return resultChannels;
   }
 
   /**
@@ -176,6 +190,15 @@ export default class Client extends EventEmitter {
    */
   public attachChannel(channel: TextChannel) {
     this.relevantChannels.set(channel.id, channel);
+  }
+
+  /**
+   * Attach multiple discord channels at once
+   *
+   * @param {Collection<string, TextChannel>} channels The channels
+   */
+  public attachChannels(channels: Collection<string, TextChannel>) {
+    channels.forEach(this.attachChannel, this);
   }
 
   /**
