@@ -1,4 +1,4 @@
-import { Message as DiscordMessage, TextChannel, User, MessageMentions } from 'discord.js';
+import { Message as DiscordMessage, MessageMentions, TextChannel, User } from 'discord.js';
 import Client from './Client';
 
 /**
