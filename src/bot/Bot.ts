@@ -1,8 +1,8 @@
+import Client from './Client';
 import ClientEventHandler from './eventHandler/ClientEventHandler';
 import DiscordEventHandler from './eventHandler/DiscordEventHandler';
 import ProcessEventHandler from './eventHandler/ProcessEventHandler';
 import IConfiguration from './interfaces/IConfiguration';
-import Client from './Client';
 import MessageParser from './message/MessageParser';
 
 /**
@@ -44,10 +44,10 @@ export default class Bot {
       discordRetryAttemps: configuration.discordRetryAttemps,
       discordRetryTimeout: configuration.discordRetryTimeout,
       discordOwnerId: configuration.discordOwnerId,
-      discordChannelRegexp: configuration.discordChannelRegexp
+      discordChannelRegexp: configuration.discordChannelRegexp,
     });
     this.messageParser = new MessageParser(this, {
-      commandPrefix: configuration.commandPrefix
+      commandPrefix: configuration.commandPrefix,
     });
 
     this.clientEventHandler = new ClientEventHandler(this);
@@ -85,4 +85,4 @@ export default class Bot {
       setTimeout(resolve, milliseconds);
     });
   }
-};
+}

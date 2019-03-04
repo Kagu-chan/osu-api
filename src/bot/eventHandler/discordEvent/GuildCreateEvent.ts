@@ -1,6 +1,6 @@
 import { Guild, TextChannel } from 'discord.js';
-import DiscordEvent from './DiscordEvent';
 import Logger from '../../Logger';
+import DiscordEvent from './DiscordEvent';
 
 /**
  * Represents a guild create event
@@ -20,13 +20,14 @@ export default class GuildCreateEvent extends DiscordEvent {
    * @inheritdoc
    * @param {Guild} guild The newly created guild
    */
-  public handler: Function = (guild: Guild) => {
+  public handler: (guild: Guild) => void = (guild: Guild) => {
     const channels = this.client.getRelevantGuildChannels(guild);
 
     this.client.attachChannels(channels);
 
     Logger.info(`Joined guild [${guild.name} (${guild.id})]`);
     channels.forEach((channel: TextChannel) => {
+      // tslint:disable-next-line max-line-length
       Logger.info(`Attached channel from new guild [${channel.name} (${channel.id})] - guild is [${guild.name} (${guild.id})]`);
     });
   }

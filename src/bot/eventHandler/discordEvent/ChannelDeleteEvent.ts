@@ -1,6 +1,6 @@
-import { TextChannel, GuildChannel } from 'discord.js';
-import DiscordEvent from './DiscordEvent';
+import { GuildChannel, TextChannel } from 'discord.js';
 import Logger from '../../Logger';
+import DiscordEvent from './DiscordEvent';
 
 /**
  * Represents a channel delete event
@@ -20,20 +20,21 @@ export default class ChannelDeleteEvent extends DiscordEvent {
    * @inheritdoc
    * @param {GuildChannel} channel The removed channel
    */
-  public handler: Function = (channel: GuildChannel) => {
+  public handler: (channel: GuildChannel) => void = (channel: GuildChannel) => {
     const {
       name: channelName,
       id: channelId,
-      guild
+      guild,
     } = channel;
     const {
       name: guildName,
-      id: guildId
+      id: guildId,
     } = guild;
 
     if (this.client.hasChannel(channel.id)) {
       this.client.detachChannel(channel as TextChannel);
 
+      // tslint:disable-next-line max-line-length
       Logger.info(`Detached removed discord channel [${channelName} (${channelId})] on guild [${guildName} (${guildId})]`);
     }
   }

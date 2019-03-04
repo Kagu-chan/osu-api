@@ -1,17 +1,17 @@
 import {
   Client as DiscordClient,
-  TextChannel,
-  User,
-  Snowflake,
-  Message,
   Collection,
   Guild,
   GuildChannel,
+  Message,
+  Snowflake,
+  TextChannel,
+  User,
 } from 'discord.js';
 import Bot from './Bot';
 import EventEmitter from './EventEmitter';
-import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
 import DiscordEvent from './eventHandler/discordEvent/DiscordEvent';
+import IDiscordConfiguration from './interfaces/IDiscordConfiguration';
 
 /**
  * Representation of a discord connection and its client interface
@@ -102,7 +102,7 @@ export default class Client extends EventEmitter {
    * @returns {Collection<Snowflake, TextChannel>} The channels relevant for the bot
    */
   public getRelevantDiscordChannels(refetch?: boolean): Collection<Snowflake, TextChannel> {
-    const guilds: Collection<Snowflake, Guild> = this.client.guilds
+    const guilds: Collection<Snowflake, Guild> = this.client.guilds;
 
     if (refetch || !this.relevantChannels) {
       this.relevantChannels = new Collection<Snowflake, TextChannel>();
@@ -172,7 +172,7 @@ export default class Client extends EventEmitter {
    * @returns {T extends DiscordEvent} The discord event instance
    * @template T
    */
-  public attachEvent<T extends DiscordEvent>(type: { new (b: Bot): T; }): T {
+  public attachEvent<T extends DiscordEvent>(type: { new (b: Bot): T; }): T { // tslint:disable-line callable-types
     const eventInstance = new type(this.bot);
     this.emit('registerEvent', this, eventInstance.eventName);
 
@@ -219,9 +219,9 @@ export default class Client extends EventEmitter {
   public async sendMessage(
     channel: Array<TextChannel | User>,
     message: string | string[]
-  ): Promise<(Message | Message[])[]> {
+  ): Promise<Array<(Message | Message[])>> {
     // Chain channels into a promise array...
-    const senders = channel.map(ch => ch.send(message));
+    const senders = channel.map((ch: TextChannel | User) => ch.send(message));
 
     // ... to wait for them to be sent
     return await Promise.all(senders);
@@ -229,7 +229,7 @@ export default class Client extends EventEmitter {
 
   /**
    * Logs in into Discord.
-   * 
+   *
    * If a login fails, it retries it several times. Between the retries,
    * a timeout takes place
    *
@@ -239,7 +239,8 @@ export default class Client extends EventEmitter {
    * @returns {Promise<void>}
    * @emits beforeLogin(sender: Client, retry: number)
    * @emits login(sender: Client)
-   * @emits loginFailed(sender: Client, error: Error, retryAttempt: number, attemptsToMade: number, attemptTimeout: number)
+   * @emits loginFailed(sender: Client, error: Error,
+   *                    retryAttempt: number, attemptsToMade: number, attemptTimeout: number)
    *
    * @see IDiscordConfiguration.discordRetryAttemps
    * @see IDiscordConfiguration.discordRetryTimeout
@@ -256,7 +257,14 @@ export default class Client extends EventEmitter {
       // We're logged in - tell the world so
       this.emit('login', this);
     } catch (error) {
-      this.emit('loginFailed', this, error, attempt, this.configuration.discordRetryAttemps, this.configuration.discordRetryTimeout);
+      this.emit(
+        'loginFailed',
+        this,
+        error,
+        attempt,
+        this.configuration.discordRetryAttemps,
+        this.configuration.discordRetryTimeout
+      );
     }
   }
 

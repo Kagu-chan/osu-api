@@ -5,9 +5,28 @@
  * @interface INodeError
  */
 export default interface INodeError {
-  code: string,
-  message: string,
-  name: string,
-  stack: string,
-  context: ErrorEvent,
+  /**
+   * @var {string} code The error code string, e.g. `ER_UNHANDLED_EXCEPTION`
+   */
+  code: string;
+
+  /**
+   * @var {string} message The message
+   */
+  message: string;
+
+  /**
+   * @var {string} name The name
+   */
+  name: string;
+
+  /**
+   * @var {string} stack The call stack
+   */
+  stack: string;
+
+  /**
+   * @var {ErrorEvent} context The error context containing the actual error
+   */
+  context: ErrorEvent;
 }

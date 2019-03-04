@@ -6,7 +6,7 @@ const bot: Bot = new Bot({
   discordRetryAttemps: Number(process.env.DISCORD_LOGIN_RETRY_ATTEMPTS),
   discordOwnerId: process.env.DISCORD_BOT_OWNER,
   discordChannelRegexp: process.env.DISCORD_CHANNEL_REGEXP,
-  commandPrefix: process.env.COMMAND_PREFIX
+  commandPrefix: process.env.COMMAND_PREFIX,
 });
 
 bot.initialize();

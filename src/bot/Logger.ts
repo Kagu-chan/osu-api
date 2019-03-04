@@ -27,6 +27,6 @@ export default class Logger {
    * @param {message: any[]} message The log message
    */
   public static log(severity: string, ...message: any) {
-    console.log(`[${severity}]`, ...message);
+    console.log(`[${severity}]`, ...message); // tslint:disable-line no-console
   }
 }

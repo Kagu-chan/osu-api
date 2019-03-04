@@ -1,6 +1,6 @@
-import EventHandler from './EventHandler';
 import Client from '../Client';
 import Logger from '../Logger';
+import EventHandler from './EventHandler';
 
 /**
  * @inheritdoc
@@ -65,7 +65,13 @@ export default class ClientEventHandler extends EventHandler {
    * @param {number} attemptsToMade max attempts
    * @param {number} attemptTimeout timeout before next attempt
    */
-  private async onLoginFailed(sender: Client, error: Error, retryAttempt: number, attemptsToMade: number, attemptTimeout: number) {
+  private async onLoginFailed(
+    sender: Client,
+    error: Error,
+    retryAttempt: number,
+    attemptsToMade: number,
+    attemptTimeout: number
+  ) {
     Logger.error('Failed to login:', error);
 
     if (retryAttempt < attemptsToMade) {
@@ -110,11 +116,11 @@ export default class ClientEventHandler extends EventHandler {
     channels.forEach((channel, channelId) => {
       const {
         name: channelName,
-        guild
+        guild,
       } = channel;
       const {
         name: guildName,
-        id: guildId
+        id: guildId,
       } = guild;
 
       Logger.info(`Attached to discord channel [${channelName} (${channelId})] on guild [${guildName} (${guildId})]`);

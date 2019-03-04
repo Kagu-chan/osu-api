@@ -1,6 +1,6 @@
 import { Guild, GuildChannel, Snowflake, TextChannel } from 'discord.js';
-import DiscordEvent from './DiscordEvent';
 import Logger from '../../Logger';
+import DiscordEvent from './DiscordEvent';
 
 /**
  * Represents a guild delete event
@@ -20,7 +20,7 @@ export default class GuildDeleteEvent extends DiscordEvent {
    * @inheritdoc
    * @param {Guild} guild The deleted guild
    */
-  public handler: Function = (guild: Guild) => {
+  public handler: (guild: Guild) => void = (guild: Guild) => {
     const guildChannels = guild.channels;
     const removedChannels: GuildChannel[] = [];
 
@@ -34,6 +34,7 @@ export default class GuildDeleteEvent extends DiscordEvent {
 
     Logger.info(`Removed guild [${guild.name} (${guild.id})]`);
     removedChannels.forEach((channel: GuildChannel) => {
+      // tslint:disable-next-line max-line-length
       Logger.info(`Detached channel from removed guild [${channel.name} (${channel.id})] - guild was [${guild.name} (${guild.id})]`);
     });
   }

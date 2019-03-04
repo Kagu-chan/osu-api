@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import EventHandler from './EventHandler';
-import Logger from '../Logger';
 import INodeError from '../interfaces/INodeError';
+import Logger from '../Logger';
+import EventHandler from './EventHandler';
 
 /**
  * @inheritdoc
@@ -26,7 +26,7 @@ export default class ProcessEventHandler extends EventHandler {
     const {
       name,
       message,
-      stack
+      stack,
     } = _.get(error, 'context.error', error);
 
     let user;
@@ -53,7 +53,7 @@ export default class ProcessEventHandler extends EventHandler {
         `Name:    ${name}`,
         `Message: ${message}`,
         `Stack:   ${stack}`,
-        '```'
+        '```',
       ].join('\n');
 
       try {
