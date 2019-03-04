@@ -1,6 +1,4 @@
 import Message from '../Message';
-import Command from './Command';
-import PingCommand from './PingCommand';
 
 export default class CommandParser {
   public static parseCommand(message: Message): string[] {

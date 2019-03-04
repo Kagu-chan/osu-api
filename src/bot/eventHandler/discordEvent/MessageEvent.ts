@@ -37,6 +37,6 @@ export default class MessageEvent extends DiscordEvent {
 
     const capitalCommand = command.replace(/^(\w)/, (c) => c.toUpperCase());
 
-    this.bot.commandDispatcher.emit(`command${capitalCommand}`, ...commandArray);
+    this.bot.commandDispatcher.emit(`command${capitalCommand}`, message, commandArray);
   }
 }

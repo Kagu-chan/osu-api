@@ -12,9 +12,10 @@ export default abstract class Command {
     this.bot = bot;
   }
 
-  public beforeCommand(message: Message) {
+  public beforeCommand(message: Message): boolean {
     console.log('before command'); // tslint:disable-line no-console
+    return true;
   }
 
-  public abstract handle(): void;
+  public abstract handle(message: Message, args: string[]): void;
 }
