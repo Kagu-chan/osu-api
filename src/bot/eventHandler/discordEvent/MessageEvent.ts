@@ -1,4 +1,5 @@
 import { Message as DiscordMessage } from 'discord.js';
+import CommandParser from '../../command/CommandParser';
 import Message from '../../Message';
 import DiscordEvent from './DiscordEvent';
 
@@ -27,10 +28,12 @@ export default class MessageEvent extends DiscordEvent {
       discordMessage
     );
 
-    if (!message.isForBot) {
+    if (!message.isForBot || message.content.length === 0) {
       return;
     }
 
-    message.channel.send(message.content);
+    const command = CommandParser.parseCommand(message);
+
+    // message.channel.send(message.content);
   }
 }

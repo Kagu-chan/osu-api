@@ -19,9 +19,14 @@ export default class Message {
       author, channel, content, mentions,
     } = discordMessage;
 
+    const isPrefixed = discordMessage.content.startsWith(commandPrefix);
+    const isMentioned = mentions.users.has(botUser.id);
+
+    const mentionString = `<@${botUser.id}>`;
+
     instance.channel = channel as TextChannel;
     instance.author = author;
-    instance.content = content;
+    instance.originalMessage = discordMessage;
     instance.isFromBot = botUser.id === author.id;
     instance.isFromAnyBot = author.bot;
     instance.isDm = channel.type === 'dm';
@@ -32,16 +37,27 @@ export default class Message {
      * A message is directed to the bot under the following conditions:
      *  - The message does not come from any bot
      *  - The message is a direct message to the bot
-     *  - The message is posted in a relevant channel and begins with the prefix
+     *  - The message is posted in a relevant channel and begins with the prefix or the bot is mentioned
      */
     instance.isForBot = !instance.isFromAnyBot && (
       instance.isDm || (
         instance.isRelevantChannel
         && (
-          discordMessage.content.startsWith(commandPrefix)
-          || mentions.members.has(botUser.id)
+          isPrefixed
+          || isMentioned
         )
     ));
+
+    // Calculate the string used for mentioning the bot in any way. Can be empty string
+    instance.prefix = isPrefixed
+      ? commandPrefix
+      : (
+        isMentioned
+        ? mentionString
+        : ''
+      );
+
+    instance.content = content.replace(instance.prefix, '').trim();
 
     return instance;
   }
@@ -72,6 +88,11 @@ export default class Message {
   public isRelevantChannel: boolean;
 
   /**
+   * @var {boolean} prefix The prefix used in this message
+   */
+  public prefix: string;
+
+  /**
    * @var {TextChannel} channel The channel the message was posted in
    */
   public channel: TextChannel;
@@ -90,6 +111,11 @@ export default class Message {
    * @var {MessageMentions} mentions The message mentions
    */
   public mentions: MessageMentions;
+
+  /**
+   * @var {DiscordMessage} originalMessage The original message
+   */
+  public originalMessage: DiscordMessage;
 
   /**
    * @constructor
