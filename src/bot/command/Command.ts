@@ -1,3 +1,4 @@
+import { TextChannel } from 'discord.js';
 import Bot from '../Bot';
 import Message from '../Message';
 import { CommandScope } from '../Types';
@@ -20,11 +21,12 @@ export default abstract class Command {
 
     const wrongPlace = !this.isValidChannel(message);
     const notAllowed = !(await this.isCommandAllowed(message));
+    const wasInternal = !this.isCommandNotInternal(message);
 
-    const isValidCommand = !(wrongPlace || notAllowed);
+    const isValidCommand = !(wrongPlace || notAllowed || wasInternal);
 
     if (!isValidCommand) {
-      this.handleInvalidCommand(message, wrongPlace, notAllowed);
+      this.handleInvalidCommand(message, wrongPlace, notAllowed, wasInternal);
     }
 
     return isValidCommand;
@@ -49,11 +51,6 @@ export default abstract class Command {
   private async isCommandAllowed(message: Message): Promise<boolean> {
     const owner = await this.bot.client.getOwner();
 
-    // Check if the scope is internal
-    if (this.scope & CommandScope.ONLY_INTERNAL) {
-      return message.isInitiatedInternal;
-    }
-
     // Check is the scope is owner scope
     if (this.scope & CommandScope.ONLY_INTERNAL) {
       return owner.id === message.author.id;
@@ -62,11 +59,49 @@ export default abstract class Command {
     return true;
   }
 
-  private handleInvalidCommand(message: Message, wasInvalidChannel: boolean, wasNotAllowed: boolean) {
+  private isCommandNotInternal(message: Message): boolean {
+    // Check if the scope is internal
+    if (this.scope & CommandScope.ONLY_INTERNAL) {
+      return message.isInitiatedInternal;
+    }
+
+    return true;
+  }
+
+  private handleInvalidCommand(
+    message: Message,
+    wasInvalidChannel: boolean,
+    wasNotAllowed: boolean,
+    wasInternal: boolean
+  ) {
     const informPerDm = this.scope & CommandScope.SECRET_ON_ERROR;
 
-    if (informPerDm && !message.isDm) {
-      // send pm details to user and trigger message to channel as well
+    let generalEvent;
+    let channelEvent;
+    let dmEvent;
+
+    if (wasInternal) {
+      generalEvent = 'commandCommandNotFound';
+    } else if (wasNotAllowed) {
+      generalEvent = 'commandCommandNotPermitted';
+    } else if (wasInvalidChannel) {
+      generalEvent = 'commandCommandWronglyPosted';
+    }
+
+    if (message.isDm || !informPerDm) {
+      channelEvent = generalEvent;
+    } else {
+      channelEvent = 'commandCommandNotFound';
+      dmEvent = generalEvent;
+    }
+
+    message.isInitiatedInternal = true;
+    if (channelEvent) {
+      this.bot.commandDispatcher.emit(channelEvent, message);
+    }
+    if (dmEvent) {
+      message.channel = message.author.dmChannel;
+      this.bot.commandDispatcher.emit(dmEvent, message);
     }
   }
 }

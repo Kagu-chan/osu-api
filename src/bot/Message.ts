@@ -1,4 +1,4 @@
-import { Message as DiscordMessage, MessageMentions, TextChannel, User } from 'discord.js';
+import { DMChannel, Message as DiscordMessage, MessageMentions, TextChannel, User } from 'discord.js';
 import Client from './Client';
 
 /**
@@ -93,9 +93,9 @@ export default class Message {
   public prefix: string;
 
   /**
-   * @var {TextChannel} channel The channel the message was posted in
+   * @var {TextChannel | DMChannel} channel The channel the message was posted in
    */
-  public channel: TextChannel;
+  public channel: TextChannel | DMChannel;
 
   /**
    * @var {User} author The message author
