@@ -1,6 +1,7 @@
 import {
   Client as DiscordClient,
   Collection,
+  DMChannel,
   Guild,
   GuildChannel,
   Message,
@@ -213,15 +214,15 @@ export default class Client extends EventEmitter {
   /**
    * Send message(s) to users or channels
    *
-   * @param {Array<TextChannel | User>} channel Users or channels to send messages to
+   * @param {Array<TextChannel | DMChannel>} channel user channels or channels to send messages to
    * @param message One or more messages to send
    */
   public async sendMessage(
-    channel: Array<TextChannel | User>,
+    channel: Array<TextChannel | DMChannel>,
     message: string | string[]
   ): Promise<Array<(Message | Message[])>> {
     // Chain channels into a promise array...
-    const senders = channel.map((ch: TextChannel | User) => ch.send(message));
+    const senders = channel.map((ch: TextChannel | DMChannel) => ch.send(message));
 
     // ... to wait for them to be sent
     return await Promise.all(senders);

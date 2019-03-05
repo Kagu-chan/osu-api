@@ -32,7 +32,9 @@ export default class CommandEventHandler extends EventHandler {
         `command${capitalCommand}`,
           async (message: Message, commandArguments: string[]) => {
           if (await command.beforeCommand(message)) {
-            command.handle(message, commandArguments);
+            const answers = command.handle(message, commandArguments);
+
+            await Promise.all(answers.map((a) => a.send()));
           }
         });
     }, this);

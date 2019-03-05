@@ -1,5 +1,6 @@
 import { TextChannel } from 'discord.js';
 import Bot from '../Bot';
+import ComposedMessage from '../ComposedMessage';
 import Message from '../Message';
 import { CommandScope } from '../Types';
 
@@ -12,6 +13,8 @@ export default abstract class Command {
   constructor(bot: Bot) {
     this.bot = bot;
   }
+
+  public abstract handle(message: Message, args: string[]): ComposedMessage[];
 
   public async beforeCommand(message: Message): Promise<boolean> {
     // Check if the scope is standard - in this case everything is allowed
@@ -31,8 +34,6 @@ export default abstract class Command {
 
     return isValidCommand;
   }
-
-  public abstract handle(message: Message, args: string[]): void;
 
   private isValidChannel(message: Message): boolean {
     // Check if the scope is an only-dm scope
