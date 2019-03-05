@@ -118,6 +118,11 @@ export default class Message {
   public originalMessage: DiscordMessage;
 
   /**
+   * @var {boolean} isInitiatedInternal Whether the message is initiated from the bot or not
+   */
+  public isInitiatedInternal: boolean = false;
+
+  /**
    * @constructor
    * @private
    */

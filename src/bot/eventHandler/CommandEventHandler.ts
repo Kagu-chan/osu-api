@@ -20,11 +20,13 @@ export default class CommandEventHandler extends EventHandler {
     this.commands.forEach((command: Command, commandName: string) => {
       const capitalCommand = commandName.replace(/^(\w)/, (m) => m.toUpperCase());
 
-      this.bot.commandDispatcher.on(`command${capitalCommand}`, (message: Message, commandArguments: string[]) => {
-        if (command.beforeCommand(message)) {
-          command.handle(message, commandArguments);
-        }
-      });
+      this.bot.commandDispatcher.on(
+        `command${capitalCommand}`,
+          async (message: Message, commandArguments: string[]) => {
+          if (await command.beforeCommand(message)) {
+            command.handle(message, commandArguments);
+          }
+        });
     }, this);
   }
 

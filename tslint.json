@@ -17,6 +17,7 @@
     "no-consecutive-blank-lines": true,
     "object-literal-sort-keys": false,
     "ordered-imports": true,
+    "no-bitwise": false,
     "quotemark": [true, "single", "jsx-double"],
     "trailing-comma": [
       true,
