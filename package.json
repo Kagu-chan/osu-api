@@ -1,6 +1,6 @@
 {
   "name": "osu-api-bot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Discord bot to ask osu!api for everything she knows",
   "main": "src/index.js",
   "scripts": {
