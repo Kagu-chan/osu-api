@@ -7,9 +7,11 @@ export default class CommandNotPermittedCommand extends Command {
   public command: string = 'commandNotPermitted';
   protected scope: CommandScope = CommandScope.ONLY_INTERNAL;
 
-  public handle(message: Message): ComposedMessage[] {
-    return [];
-     // tslint:disable-next-line no-console max-line-length
-    // console.log('command not permitted'); // tslint:disable-line no-console
+  public handle(message: Message, args: string[]): ComposedMessage[] {
+    return [new ComposedMessage(
+      this.bot.client,
+      [message.channel],
+      `You are not allowed to use the command \`${args[0]}\``
+    )];
   }
 }

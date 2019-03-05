@@ -27,6 +27,7 @@ export default class MessageEvent extends DiscordEvent {
       this.bot.getConfigurationValue('commandPrefix'),
       discordMessage
     );
+    const dispatcher = this.bot.commandDispatcher;
 
     if (!message.isForBot || message.content.length === 0) {
       return;
@@ -36,7 +37,14 @@ export default class MessageEvent extends DiscordEvent {
     const command = commandArray.shift();
 
     const capitalCommand = command.replace(/^(\w)/, (c) => c.toUpperCase());
+    let event = `command${capitalCommand}`;
 
-    this.bot.commandDispatcher.emit(`command${capitalCommand}`, message, commandArray);
+    if (!dispatcher.eventNames().includes(event)) {
+      event = 'commandCommandNotFound';
+      commandArray.unshift(command);
+      message.isInitiatedInternal = true;
+    }
+
+    dispatcher.emit(event, message, commandArray);
   }
 }

@@ -7,9 +7,11 @@ export default class CommandNotFoundCommand extends Command {
   public command: string = 'commandNotFound';
   protected scope: CommandScope = CommandScope.ONLY_INTERNAL;
 
-  public handle(message: Message): ComposedMessage[] {
-    return [];
-     // tslint:disable-next-line no-console max-line-length
-    // console.log('command not found'); // tslint:disable-line no-console
+  public handle(message: Message, args: string[]): ComposedMessage[] {
+    return [new ComposedMessage(
+      this.bot.client,
+      [message.channel],
+      `Command \`${args[0]}\` was not found`
+    )];
   }
 }

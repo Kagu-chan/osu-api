@@ -98,11 +98,11 @@ export default abstract class Command {
 
     message.isInitiatedInternal = true;
     if (channelEvent) {
-      this.bot.commandDispatcher.emit(channelEvent, message);
+      this.bot.commandDispatcher.emit(channelEvent, message, [this.command]);
     }
     if (dmEvent) {
       message.channel = message.author.dmChannel;
-      this.bot.commandDispatcher.emit(dmEvent, message);
+      this.bot.commandDispatcher.emit(dmEvent, message, [this.command]);
     }
   }
 }
