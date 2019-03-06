@@ -7,7 +7,7 @@
     "start": "node .",
     "lint": "tslint -c tslint.json --project .",
     "build": "tsc",
-    "build:watch": "tsc --watch"
+    "tsc:watch": "tsc --watch"
   },
   "author": "Kagu-chan",
   "license": "ISC",
