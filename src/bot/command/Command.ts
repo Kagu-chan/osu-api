@@ -53,7 +53,7 @@ export default abstract class Command {
     const owner = await this.bot.client.getOwner();
 
     // Check is the scope is owner scope
-    if (this.scope & CommandScope.ONLY_INTERNAL) {
+    if (this.scope & CommandScope.ONLY_OWNERS) {
       return owner.id === message.author.id;
     }
 
