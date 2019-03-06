@@ -5,7 +5,8 @@
     "module": "commonjs",
     "target": "es2018",
     "types": ["node", "discord.js"],
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./src/**/*"
