@@ -5,7 +5,7 @@ import Command from './Command';
 
 export default class CommandNotFoundCommand extends Command {
   public command: string = 'commandNotFound';
-  protected scope: CommandScope = CommandScope.ONLY_INTERNAL;
+  public readonly scope: CommandScope = CommandScope.ONLY_INTERNAL;
 
   public handle(message: Message, args: string[]): ComposedMessage[] {
     return [new ComposedMessage(

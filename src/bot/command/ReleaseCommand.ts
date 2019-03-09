@@ -7,7 +7,7 @@ import Command from './Command';
 
 export default class ReleaseCommand extends Command {
   public command: string = 'release';
-  protected scope: CommandScope = CommandScope.ONLY_DM | CommandScope.ONLY_OWNERS | CommandScope.SECRET_ON_ERROR;
+  public readonly scope: CommandScope = CommandScope.ONLY_DM | CommandScope.ONLY_OWNERS | CommandScope.SECRET_ON_ERROR;
 
   public handle(message: Message): ComposedMessage[] {
     const currentVersionText = release[version];

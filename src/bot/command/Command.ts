@@ -6,7 +6,7 @@ import { CommandScope } from '../Types';
 
 export default abstract class Command {
   public abstract command: string;
-  protected abstract scope: CommandScope;
+  public abstract readonly scope: CommandScope;
 
   protected bot: Bot;
 

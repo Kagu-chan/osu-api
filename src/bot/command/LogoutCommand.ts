@@ -6,7 +6,7 @@ import Command from './Command';
 
 export default class LogoutCommand extends Command {
   public command: string = 'logout';
-  protected scope: CommandScope = CommandScope.ONLY_DM | CommandScope.ONLY_OWNERS | CommandScope.SECRET_ON_ERROR;
+  public readonly scope: CommandScope = CommandScope.ONLY_DM | CommandScope.ONLY_OWNERS | CommandScope.SECRET_ON_ERROR;
 
   public async handle(message: Message): Promise<ComposedMessage[]> {
     const author = message.author;

@@ -5,7 +5,7 @@ import Command from './Command';
 
 export default class PingCommand extends Command {
   public command: string = 'ping';
-  protected scope: CommandScope = CommandScope.STANDARD;
+  public readonly scope: CommandScope = CommandScope.STANDARD;
 
   public handle(message: Message): ComposedMessage[] {
     return [new ComposedMessage(this.bot.client, [message.channel], 'pong')];

@@ -5,7 +5,7 @@ import Command from './Command';
 
 export default class CommandWronglyPostedCommand extends Command {
   public command: string = 'commandWronglyPosted';
-  protected scope: CommandScope = CommandScope.ONLY_INTERNAL;
+  public readonly scope: CommandScope = CommandScope.ONLY_INTERNAL;
 
   public handle(message: Message, args: string[]): ComposedMessage[] {
     return [new ComposedMessage(
