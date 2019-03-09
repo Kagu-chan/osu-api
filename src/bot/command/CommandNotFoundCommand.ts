@@ -11,7 +11,7 @@ export default class CommandNotFoundCommand extends Command {
     return [new ComposedMessage(
       this.bot.client,
       [message.channel],
-      `Command \`${args[0]}\` was not found`
+      `Command \`${args[0]}\` does not exist! Try out \`help\` or \`commands\``
     )];
   }
 }

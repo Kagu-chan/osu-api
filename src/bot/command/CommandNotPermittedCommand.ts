@@ -11,7 +11,7 @@ export default class CommandNotPermittedCommand extends Command {
     return [new ComposedMessage(
       this.bot.client,
       [message.channel],
-      `You are not allowed to use the command \`${args[0]}\``
+      `You're not allowed to execute \`${args[0]}\`.`
     )];
   }
 }
