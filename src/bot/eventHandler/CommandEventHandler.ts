@@ -8,6 +8,7 @@ import CommandWronglyPostedCommand from '../command/CommandWronglyPostedCommand'
 import DocsCommand from '../command/DocsCommand';
 import LogoutCommand from '../command/LogoutCommand';
 import MaintenanceCommand from '../command/MaintenanceCommand';
+import ModsCommand from '../command/ModsCommand';
 import PingCommand from '../command/PingCommand';
 import ReleaseCommand from '../command/ReleaseCommand';
 import Logger from '../Logger';
@@ -31,6 +32,7 @@ export default class CommandEventHandler extends EventHandler {
     this.addCommand(PingCommand);
     this.addCommand(DocsCommand);
     this.addCommand(CommandsCommand);
+    this.addCommand(ModsCommand);
   }
 
   public registerEvents() {
