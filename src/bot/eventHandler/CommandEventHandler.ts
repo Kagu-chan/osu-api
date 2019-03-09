@@ -4,6 +4,7 @@ import Command from '../command/Command';
 import CommandNotFoundCommand from '../command/CommandNotFoundCommand';
 import CommandNotPermittedCommand from '../command/CommandNotPermittedCommand';
 import CommandWronglyPostedCommand from '../command/CommandWronglyPostedCommand';
+import MaintenanceCommand from '../command/MaintenanceCommand';
 import PingCommand from '../command/PingCommand';
 import ReleaseCommand from '../command/ReleaseCommand';
 import Logger from '../Logger';
@@ -22,6 +23,7 @@ export default class CommandEventHandler extends EventHandler {
     this.addCommand(CommandNotPermittedCommand);
     this.addCommand(CommandWronglyPostedCommand);
     this.addCommand(ReleaseCommand);
+    this.addCommand(MaintenanceCommand);
     this.addCommand(PingCommand);
   }
 
