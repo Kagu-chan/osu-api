@@ -1,4 +1,3 @@
-import { version } from '../../../package.json';
 import ComposedMessage from '../ComposedMessage';
 import Message from '../Message';
 import { CommandScope } from '../Types';
