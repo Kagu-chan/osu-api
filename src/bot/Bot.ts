@@ -21,6 +21,11 @@ export default class Bot {
   public readonly commandDispatcher: EventEmitter;
 
   /**
+   * @var {CommandEventHandler} commandEventHandler
+   */
+  public readonly commandEventHandler: CommandEventHandler;
+
+  /**
    * @var {ClientEventHandler} clientEventHandler
    */
   private readonly clientEventHandler: ClientEventHandler;
@@ -34,11 +39,6 @@ export default class Bot {
    * @var {ProcessEventHandler} processEventHandler
    */
   private readonly processEventHandler: ProcessEventHandler;
-
-  /**
-   * @var {CommandEventHandler} commandEventHandler
-   */
-  private readonly commandEventHandler: CommandEventHandler;
 
   /**
    * @var {IConfiguration} configuration The configuration
