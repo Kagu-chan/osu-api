@@ -4,6 +4,7 @@ import Command from '../command/Command';
 import CommandNotFoundCommand from '../command/CommandNotFoundCommand';
 import CommandNotPermittedCommand from '../command/CommandNotPermittedCommand';
 import CommandWronglyPostedCommand from '../command/CommandWronglyPostedCommand';
+import LogoutCommand from '../command/LogoutCommand';
 import MaintenanceCommand from '../command/MaintenanceCommand';
 import PingCommand from '../command/PingCommand';
 import ReleaseCommand from '../command/ReleaseCommand';
@@ -24,6 +25,7 @@ export default class CommandEventHandler extends EventHandler {
     this.addCommand(CommandWronglyPostedCommand);
     this.addCommand(ReleaseCommand);
     this.addCommand(MaintenanceCommand);
+    this.addCommand(LogoutCommand);
     this.addCommand(PingCommand);
   }
 
@@ -36,7 +38,7 @@ export default class CommandEventHandler extends EventHandler {
         `command${capitalCommand}`,
           async (message: Message, commandArguments: string[]) => {
           if (await command.beforeCommand(message)) {
-            const answers = command.handle(message, commandArguments);
+            const answers = await command.handle(message, commandArguments);
 
             await Promise.all(answers.map((a) => a.send()));
           }
