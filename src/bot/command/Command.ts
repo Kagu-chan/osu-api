@@ -14,7 +14,7 @@ export default abstract class Command {
     this.bot = bot;
   }
 
-  public abstract handle(message: Message, args: string[]): ComposedMessage[];
+  public abstract handle(message: Message, args: string[]): ComposedMessage[] | Promise<ComposedMessage[]>;
 
   public async beforeCommand(message: Message): Promise<boolean> {
     // Check if the scope is standard - in this case everything is allowed
