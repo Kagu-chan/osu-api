@@ -3,6 +3,7 @@ import Bot from '../Bot';
 import Command from '../command/Command';
 import CommandNotFoundCommand from '../command/CommandNotFoundCommand';
 import CommandNotPermittedCommand from '../command/CommandNotPermittedCommand';
+import CommandsCommand from '../command/CommandsCommand';
 import CommandWronglyPostedCommand from '../command/CommandWronglyPostedCommand';
 import DocsCommand from '../command/DocsCommand';
 import LogoutCommand from '../command/LogoutCommand';
@@ -14,7 +15,7 @@ import Message from '../Message';
 import EventHandler from './EventHandler';
 
 export default class CommandEventHandler extends EventHandler {
-  protected commands: Collection<string, Command>;
+  public commands: Collection<string, Command>;
 
   constructor(bot: Bot) {
     super(bot);
@@ -29,6 +30,7 @@ export default class CommandEventHandler extends EventHandler {
     this.addCommand(LogoutCommand);
     this.addCommand(PingCommand);
     this.addCommand(DocsCommand);
+    this.addCommand(CommandsCommand);
   }
 
   public registerEvents() {
