@@ -11,7 +11,7 @@ export default class MaintenanceCommand extends Command {
     return [new ComposedMessage(
       this.bot.client,
       this.bot.client.getRelevantDiscordChannels().array(),
-      '**BOT MAINTENANCE!** Bot is going down for maintenance soon - Please be pacient'
+      'maintenance'
     )];
   }
 }

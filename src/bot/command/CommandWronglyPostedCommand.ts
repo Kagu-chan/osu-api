@@ -11,8 +11,9 @@ export default class CommandWronglyPostedCommand extends Command {
     return [new ComposedMessage(
       this.bot.client,
       [message.channel],
-      // tslint:disable-next-line max-line-length
-      `The \`${args[0]}\` command is not ment to be excecuted here - use a ${message.isDm ? 'channel' : 'direct'} message instead`
+      'commandWronglyPosted',
+      args[0],
+      message.isDm ? 'channel' : 'direct'
     )];
   }
 }

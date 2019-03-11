@@ -9,7 +9,8 @@ export default class ModsCommand extends Command {
 
   public handle(message: Message): ComposedMessage[] {
     // tslint:disable max-line-length
-    return [new ComposedMessage(this.bot.client, [message.channel], `
+    // abuse the i18n auto translation at this point!
+    return [new ComposedMessage(this.bot.client, [message.channel], 'mods', `
 \`\`\`csharp
 enum Mods
 {

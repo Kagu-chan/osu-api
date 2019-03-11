@@ -8,6 +8,6 @@ export default class DocsCommand extends Command {
   public readonly scope: CommandScope = CommandScope.STANDARD;
 
   public handle(message: Message): ComposedMessage[] {
-    return [new ComposedMessage(this.bot.client, [message.channel], 'https://github.com/ppy/osu-api/wiki')];
+    return [new ComposedMessage(this.bot.client, [message.channel], 'docs')];
   }
 }

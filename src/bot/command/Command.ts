@@ -2,6 +2,7 @@ import { TextChannel } from 'discord.js';
 import Bot from '../Bot';
 import ComposedMessage from '../ComposedMessage';
 import Message from '../Message';
+import TranslationInterface from '../TranslationInterface';
 import { CommandScope } from '../Types';
 
 export default abstract class Command {
@@ -10,8 +11,12 @@ export default abstract class Command {
 
   protected bot: Bot;
 
+  protected translationInterface: TranslationInterface;
+
   constructor(bot: Bot) {
     this.bot = bot;
+
+    this.translationInterface = new TranslationInterface();
   }
 
   public abstract handle(message: Message, args: string[]): ComposedMessage[] | Promise<ComposedMessage[]>;

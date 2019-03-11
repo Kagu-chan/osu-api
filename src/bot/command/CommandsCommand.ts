@@ -14,7 +14,7 @@ export default class CommandsCommand extends Command {
 
     const commands = this.bot.commandEventHandler.commands;
     const commandsMessage = [
-      'Available Commands:\n```\n',
+      this.translationInterface.__('commands.commands.header'),
     ];
 
     const pushCommand = (command) => {
@@ -42,7 +42,7 @@ export default class CommandsCommand extends Command {
       }
     });
 
-    commandsMessage.push('```');
+    commandsMessage.push(this.translationInterface.__('commands.commands.footer'));
 
     return [new ComposedMessage(this.bot.client, [message.channel], commandsMessage.join(''))];
   }

@@ -14,7 +14,9 @@ export default class ReleaseCommand extends Command {
     return [new ComposedMessage(
       this.bot.client,
       this.bot.client.getRelevantDiscordChannels().array(),
-      `**BOT UPDATED!** New version is *v${version}*\n\`\`\`${currentVersionText.join('\n')}\`\`\``
+      'release',
+      version,
+      currentVersionText.join('\n')
     )];
   }
 }

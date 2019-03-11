@@ -8,6 +8,6 @@ export default class PingCommand extends Command {
   public readonly scope: CommandScope = CommandScope.STANDARD;
 
   public handle(message: Message): ComposedMessage[] {
-    return [new ComposedMessage(this.bot.client, [message.channel], 'pong')];
+    return [new ComposedMessage(this.bot.client, [message.channel], 'ping')];
   }
 }

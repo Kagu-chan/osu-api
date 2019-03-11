@@ -12,17 +12,25 @@ export default class LogoutCommand extends Command {
     const author = message.author;
     const { tag, id } = author;
 
-    Logger.info(`**LOGGING OUT** (triggered by ${tag} (${id}))`);
+    Logger.info(this.translationInterface.__('commands.logout.log', tag, id));
 
-    await (new ComposedMessage(this.bot.client, [message.channel], 'Logging out...')).send();
+    await (new ComposedMessage(
+      this.bot.client,
+      [message.channel],
+      'logout.user'
+    )).send();
 
     try {
       await this.bot.client.logout();
-      Logger.info('**LOGGED OUT**');
+      Logger.info(this.translationInterface.__('commands.logout.done', tag, id));
 
       process.exit();
     } catch (error) {
-      await (new ComposedMessage(this.bot.client, [message.channel], 'Logout failed')).send();
+      await (new ComposedMessage(
+        this.bot.client,
+        [message.channel],
+        'logout.fail'
+      )).send();
 
       throw error;
     }
