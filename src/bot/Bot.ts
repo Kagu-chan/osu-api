@@ -5,7 +5,6 @@ import CommandEventHandler from './eventHandler/CommandEventHandler';
 import DiscordEventHandler from './eventHandler/DiscordEventHandler';
 import ProcessEventHandler from './eventHandler/ProcessEventHandler';
 import IConfiguration from './interfaces/IConfiguration';
-import TranslationInterface from './TranslationInterface';
 
 /**
  * @class Bot
@@ -25,11 +24,6 @@ export default class Bot {
    * @var {CommandEventHandler} commandEventHandler
    */
   public readonly commandEventHandler: CommandEventHandler;
-
-  /**
-   * @var {TranslationInterface} translationInterface Translation interface
-   */
-  private translationInterface: TranslationInterface;
 
   /**
    * @var {ClientEventHandler} clientEventHandler
@@ -72,10 +66,6 @@ export default class Bot {
     this.discordEventHandler = new DiscordEventHandler(this);
     this.processEventHandler = new ProcessEventHandler(this);
     this.commandEventHandler = new CommandEventHandler(this);
-
-    this.translationInterface = new TranslationInterface();
-
-    console.log(this.translationInterface.__('hello'));
   }
 
   /**
