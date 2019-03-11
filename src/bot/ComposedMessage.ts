@@ -20,7 +20,7 @@ export default class ComposedMessage {
 
   public async send(): Promise<Array<(Message | Message[])>> {
     if (this.alreadySent) {
-      throw new Error('Message is already sent');
+      throw new Error(this.translationInterface.__('error.messageSend'));
     }
 
     return await this.client.sendMessage(this.channel, this.content);

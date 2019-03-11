@@ -18,5 +18,8 @@
     "mods": "%s",
     "ping": "pong",
     "release": "**BOT UPDATED!** New version is *v%s*\n```%s``"
-	}
+  },
+  "errors": {
+    "messageSend": "Messae is already sent"
+  }
 }
