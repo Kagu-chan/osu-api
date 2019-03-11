@@ -18,7 +18,9 @@
     "typescript-tslint-plugin": "^0.3.1"
   },
   "dependencies": {
+    "@types/i18n": "^0.8.5",
     "discord.js": "^11.3.2",
+    "i18n": "^0.8.3",
     "lodash": "^4.17.10"
   }
 }
