@@ -19,7 +19,7 @@ export default class MessageEvent extends DiscordEvent {
    * Handle any discord message
    *
    * @inheritdoc
-   * @param {Guild} guild The deleted guild
+   * @param {DiscordMessage} discordMessage The message sent from discord
    */
   public handler: (discordMessage: DiscordMessage) => void = (discordMessage: DiscordMessage) => {
     const message: Message = Message.fromDiscordMessage(
