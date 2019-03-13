@@ -6,6 +6,7 @@ import CommandNotPermittedCommand from '../command/CommandNotPermittedCommand';
 import CommandsCommand from '../command/CommandsCommand';
 import CommandWronglyPostedCommand from '../command/CommandWronglyPostedCommand';
 import DocsCommand from '../command/DocsCommand';
+import HelpCommand from '../command/HelpCommand';
 import LogoutCommand from '../command/LogoutCommand';
 import MaintenanceCommand from '../command/MaintenanceCommand';
 import ModsCommand from '../command/ModsCommand';
@@ -25,14 +26,15 @@ export default class CommandEventHandler extends EventHandler {
 
     this.addCommand(CommandNotFoundCommand);
     this.addCommand(CommandNotPermittedCommand);
-    this.addCommand(CommandWronglyPostedCommand);
-    this.addCommand(ReleaseCommand);
-    this.addCommand(MaintenanceCommand);
-    this.addCommand(LogoutCommand);
-    this.addCommand(PingCommand);
-    this.addCommand(DocsCommand);
     this.addCommand(CommandsCommand);
+    this.addCommand(CommandWronglyPostedCommand);
+    this.addCommand(DocsCommand);
+    this.addCommand(HelpCommand);
+    this.addCommand(LogoutCommand);
+    this.addCommand(MaintenanceCommand);
     this.addCommand(ModsCommand);
+    this.addCommand(PingCommand);
+    this.addCommand(ReleaseCommand);
   }
 
   public registerEvents() {
