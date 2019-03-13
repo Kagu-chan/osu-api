@@ -47,6 +47,7 @@ export default class ClientEventHandler extends EventHandler {
     Logger.info(`Logged in as ${botUser.tag}`);
 
     sender.notify('ready');
+    sender.setPresence();
   }
 
   /**

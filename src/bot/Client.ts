@@ -228,6 +228,15 @@ export default class Client extends EventEmitter {
     return await Promise.all(senders);
   }
 
+  public setPresence(): void {
+    this.client.user.setPresence({
+      status: 'online',
+      game: {
+        name: `@${this.client.user.username} help`,
+      },
+    });
+  }
+
   /**
    * Logs in into Discord.
    *
