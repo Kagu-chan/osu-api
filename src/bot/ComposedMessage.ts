@@ -1,15 +1,15 @@
-import { DMChannel, Message, TextChannel } from 'discord.js';
+import { DMChannel, Message, TextChannel, User } from 'discord.js';
 import Client from './Client';
 import TranslationInterface from './TranslationInterface';
 
 export default class ComposedMessage {
   private client: Client;
-  private channel: Array<TextChannel | DMChannel>;
+  private channel: Array<TextChannel | DMChannel | User>;
   private content: string;
   private alreadySent: boolean = false;
   private translationInterface: TranslationInterface = new TranslationInterface();
 
-  constructor(client: Client, channel: Array<TextChannel | DMChannel>, key: string, ...args: string[]) {
+  constructor(client: Client, channel: Array<TextChannel | DMChannel | User>, key: string, ...args: string[]) {
     const contentKey = `commands.${key}`;
 
     this.content = this.translationInterface.__(contentKey, ...args);

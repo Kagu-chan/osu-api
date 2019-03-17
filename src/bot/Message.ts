@@ -95,7 +95,7 @@ export default class Message {
   /**
    * @var {TextChannel | DMChannel} channel The channel the message was posted in
    */
-  public channel: TextChannel | DMChannel;
+  public channel: TextChannel | DMChannel | User;
 
   /**
    * @var {User} author The message author
@@ -127,4 +127,23 @@ export default class Message {
    * @private
    */
   private constructor() {}
+
+  public clone(): Message {
+    const instance = new Message();
+
+    instance.channel = this.channel;
+    instance.author = this.author;
+    instance.originalMessage = this.originalMessage;
+    instance.isFromBot = this.isFromBot;
+    instance.isFromAnyBot = this.isFromAnyBot;
+    instance.isDm = this.isDm;
+    instance.mentions = this.mentions;
+    instance.isRelevantChannel = this.isRelevantChannel;
+    instance.isForBot = this.isForBot;
+    instance.prefix = this.prefix;
+    instance.content = this.content;
+    instance.isInitiatedInternal = this.isInitiatedInternal;
+
+    return instance;
+  }
 }

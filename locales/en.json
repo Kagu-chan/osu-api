@@ -6,7 +6,7 @@
 			"header": "Available Commands:\n```\n",
 			"footer": "```"
 		},
-		"commandWronglyPosted": "The `@@%s` command is not ment to be excecuted here - use a %s message instead`",
+		"commandWronglyPosted": "The `@@%s` command is not meant to be excecuted here - use a %s message instead",
 		"docs": "https://github.com/ppy/osu-api/wiki",
 		"logout": {
 			"log": "**LOGGING OUT** (triggered by %s (%s))",

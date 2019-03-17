@@ -85,6 +85,7 @@ export default abstract class Command {
     let generalEvent;
     let channelEvent;
     let dmEvent;
+    let cloneMessage;
 
     if (wasInternal) {
       generalEvent = 'commandCommandNotFound';
@@ -106,8 +107,10 @@ export default abstract class Command {
       this.bot.commandDispatcher.emit(channelEvent, message, [this.command]);
     }
     if (dmEvent) {
-      message.channel = message.author.dmChannel;
-      this.bot.commandDispatcher.emit(dmEvent, message, [this.command]);
+      cloneMessage = message.clone();
+      cloneMessage.channel = cloneMessage.author;
+
+      this.bot.commandDispatcher.emit(dmEvent, cloneMessage, [this.command]);
     }
   }
 }
