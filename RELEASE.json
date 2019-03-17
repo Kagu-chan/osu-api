@@ -12,6 +12,10 @@
     "* Improved bot logging - absolutely no private data will be logged except attempts to use administrative commands",
     "* Improved bot stability"
   ],
+  "0.2.1": [
+    "**HOTFIX RELEASE**",
+    "* Fix connection issue leading to endless loop"
+  ],
   "0.3.0": [
     "* Commands can now be triggered by `<prefix><command name>`, `@<bot user> <command name> or in DM just by <command name>",
     "* The `commands` command now tells the user which commands he can use in the current scope",
