@@ -1,12 +1,12 @@
 {
 	"commands": {
 		"commandNotFound": "Command `@@%s` does not exist! Try out `@@help` or `@@commands`",
-		"commandNotPermitted": "You're not allowed to execute `@@%s`.",
+		"commandNotPermitted": "You are not allowed to execute `@@%s`.",
 		"commands": {
 			"header": "Available Commands:\n```\n",
 			"footer": "```"
 		},
-		"commandWronglyPosted": "The `@@%s` command is not ment to be excecuted here - use a %s message instead`",
+		"commandWronglyPosted": "The `@@%s` command is not meant to be excecuted here - use a %s message instead`",
 		"docs": "https://github.com/ppy/osu-api/wiki",
 		"logout": {
 			"log": "**LOGGING OUT** (triggered by %s (%s))",
@@ -14,7 +14,7 @@
 			"done": "**LOGGED OUT**",
 			"fail": "Logout failed"
 		},
-		"maintenance": "**BOT MAINTENANCE!** Bot is going down for maintenance soon - Please be pacient",
+		"maintenance": "**BOT MAINTENANCE!** Bot is going down for maintenance soon - Please be patient",
 		"mods": "%s",
 		"ping": "pong",
 		"release": "**BOT UPDATED!** New version is *v%s*\n```%s``",
@@ -28,11 +28,11 @@
       "getBeatmaps": "",
       "getUser": "",
       "help": "Type `@@help <COMMAND>` to get help for the command.\n\nType `@@help` to see this message.\nType `@@commands` to see a list of commands",
-      "logout": "Type `@@logout` to logout the bot and close the connection to Discord.",
-      "maintenance": "Type `@@maintenance` to send a maintenance note message to **ALL servers**",
+      "logout": "Type `@@logout` to log out the bot and terminate the connection to Discord.",
+      "maintenance": "Type `@@maintenance` to send a maintenance notification message to **ALL servers**",
       "mods": "Type `@@mods` to see the mods definition (bitwise enum)",
       "ping": "Type `@@ping` to get a pong",
-      "release": "Type `@@release` to send a release note message to **ALL servers**"
+      "release": "Type `@@release` to send a release notification message to **ALL servers**"
 		}
 	},
 	"errors": {
