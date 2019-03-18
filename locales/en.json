@@ -37,5 +37,8 @@
 	},
 	"errors": {
 		"messageSend": "Message is already sent"
+	},
+	"presence": {
+		"maintenance": "MAINTENANCE"
 	}
 }

@@ -228,11 +228,11 @@ export default class Client extends EventEmitter {
     return await Promise.all(senders);
   }
 
-  public setPresence(): void {
+  public setPresence(alternativeText?: string): void {
     this.client.user.setPresence({
       status: 'online',
       game: {
-        name: `@${this.client.user.username} help`,
+        name: alternativeText || `@${this.client.user.username} help`,
       },
     });
   }
