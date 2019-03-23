@@ -44,6 +44,6 @@ export default class CommandsCommand extends Command {
 
     commandsMessage.push(this.translationInterface.__('commands.commands.footer'));
 
-    return [new ComposedMessage(this.bot.client, [message.channel], commandsMessage.join(''))];
+    return [new ComposedMessage(this.bot.client, [message.channel], 'empty', commandsMessage.join(''))];
   }
 }
