@@ -94,6 +94,15 @@ export default class Client extends EventEmitter {
   }
 
   /**
+   * Fetch all guilds this bot is connected to
+   *
+   * @returns {Collection<Snowflake, Guild>}
+   */
+  public getConnectedGuilds(): Collection<Snowflake, Guild> {
+    return this.client.guilds;
+  }
+
+  /**
    * Fetch relevant discord channels
    *
    * Channels are cached upon methods calls

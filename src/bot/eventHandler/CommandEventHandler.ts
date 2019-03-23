@@ -1,5 +1,6 @@
 import { Collection } from 'discord.js';
 import Bot from '../Bot';
+import ChannelsCommand from '../command/ChannelsCommand';
 import Command from '../command/Command';
 import CommandNotFoundCommand from '../command/CommandNotFoundCommand';
 import CommandNotPermittedCommand from '../command/CommandNotPermittedCommand';
@@ -24,6 +25,7 @@ export default class CommandEventHandler extends EventHandler {
 
     this.commands = new Collection<string, Command>();
 
+    this.addCommand(ChannelsCommand);
     this.addCommand(CommandNotFoundCommand);
     this.addCommand(CommandNotPermittedCommand);
     this.addCommand(CommandsCommand);
