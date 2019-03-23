@@ -214,15 +214,15 @@ export default class Client extends EventEmitter {
   /**
    * Send message(s) to users or channels
    *
-   * @param {Array<TextChannel | DMChannel>} channel user channels or channels to send messages to
+   * @param {Array<TextChannel | DMChannel | User>} channel user channels or channels to send messages to
    * @param message One or more messages to send
    */
   public async sendMessage(
-    channel: Array<TextChannel | DMChannel>,
+    channel: Array<TextChannel | DMChannel | User>,
     message: string | string[]
   ): Promise<Array<(Message | Message[])>> {
     // Chain channels into a promise array...
-    const senders = channel.map((ch: TextChannel | DMChannel) => ch.send(message));
+    const senders = channel.map((ch: TextChannel | DMChannel | User) => ch.send(message));
 
     // ... to wait for them to be sent
     return await Promise.all(senders);
