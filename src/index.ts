@@ -7,6 +7,8 @@ const bot: Bot = new Bot({
   discordOwnerId: process.env.DISCORD_BOT_OWNER,
   discordChannelRegexp: process.env.DISCORD_CHANNEL_REGEXP,
   commandPrefix: process.env.COMMAND_PREFIX,
+  apiUrl: process.env.API_URL,
+  apiKey: process.env.API_KEY,
 });
 
 bot.initialize();

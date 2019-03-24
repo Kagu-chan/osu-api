@@ -15,7 +15,7 @@ export default class GetUserCommand extends Command {
       .max(3)
       .default(0)
       .optional(),
-    eventDays: Joi.number()
+    event_days: Joi.number()
       .min(1)
       .max(31)
       .default(1)
@@ -23,7 +23,7 @@ export default class GetUserCommand extends Command {
     type: Joi.string()
       .valid('string', 'id')
       .optional(),
-    userName: Joi.string()
+    u: Joi.string()
       .required()
       .when('type', {
         is: 'id',
@@ -32,16 +32,23 @@ export default class GetUserCommand extends Command {
   });
 
   protected aliases: object = {
-    first: ['userName'],
+    first: ['u'],
     m: 'mode',
     t: 'type',
-    u: 'userName',
+    userName: 'u',
+    user_name: 'u',
+    eventDays: 'event_days',
   };
 
   public async handle(message: Message, args: string[]): Promise<ComposedMessage[]> {
     const parsedArgs: string | object = await CommandValidator.validate(this.schemaOptions, this.aliases, args);
 
     if (typeof parsedArgs === 'object') {
+      this.bot.API.request('get_user', parsedArgs)
+        .then((data) => this.bot.API.responseToTextMessage(data))
+        .then((chunks: string[]) => new ComposedMessage(this.bot.client, [message.channel], chunks))
+        .then((composed) => composed.send());
+
       return [new ComposedMessage(this.bot.client, [message.channel], 'api.talking')];
     } else {
       return [new ComposedMessage(this.bot.client, [message.channel], 'api.validationError', parsedArgs)];

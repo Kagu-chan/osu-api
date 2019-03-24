@@ -37,4 +37,14 @@ export default interface IConfiguration {
    * @var {string} commandPrefix The command prefix
    */
   commandPrefix: string;
+
+  /**
+   * @var {string} apiUrl api endpoint
+   */
+  apiUrl: string;
+
+  /**
+   * @var {string} apiKey api key to use
+   */
+  apiKey: string;
 }
