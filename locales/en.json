@@ -34,7 +34,7 @@
       "commandWronglyPosted": "not meant to be used directly",
       "docs": "Type `@@docs` to see the link to osu!api documentation",
       "getBeatmaps": "",
-      "getUser": "",
+      "getUser": "Type `@@getUser <user_name>` to fetch an user from the API.\n\nOptional parameters are:\n```m (mode):   0 (default) = osu, 1 = taiko, 2 = ctb, 3 = mania\nt (type):   `id` or `string` for unclear user names\nevent_days: How many days of epic events should be shown (1-31, 1 = default)\n```",
       "help": "Type `@@help <COMMAND>` to get help for the command.\n\nType `@@help` to see this message.\nType `@@commands` to see a list of commands",
       "logout": "Type `@@logout` to log out the bot and terminate the connection to Discord.",
       "maintenance": "Type `@@maintenance` to send a maintenance notification message to **ALL servers**",
