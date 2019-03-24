@@ -11,7 +11,14 @@ export default class TranslationInterface {
   }
 
   public __(passphraseOptions: string | TranslateOptions, ...replace: string[]): string {
-    return __(passphraseOptions, ...replace)
+    let translated;
+
+    if (passphraseOptions) {
+      translated = __(passphraseOptions, ...replace);
+    } else {
+      [translated] = replace;
+    }
+    return translated
       .replace(/(?<=(@@))([a-z]+)/gi, `${process.env.COMMAND_PREFIX}$&`)
       .replace(/@@/g, '');
   }

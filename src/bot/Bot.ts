@@ -1,4 +1,5 @@
 import { EventEmitter } from 'events';
+import API from './API';
 import Client from './Client';
 import ClientEventHandler from './eventHandler/ClientEventHandler';
 import CommandEventHandler from './eventHandler/CommandEventHandler';
@@ -14,6 +15,11 @@ export default class Bot {
    * @var {Client} client The discord client
    */
   public readonly client: Client;
+
+  /**
+   * @var {API} API API handler
+   */
+  public readonly API: API;
 
   /**
    * @var {EventEmitter} commandDispatcher Dispatcher for bot commands
@@ -58,6 +64,11 @@ export default class Bot {
       discordRetryTimeout: configuration.discordRetryTimeout,
       discordOwnerId: configuration.discordOwnerId,
       discordChannelRegexp: configuration.discordChannelRegexp,
+    });
+
+    this.API = new API({
+      apiKey: configuration.apiKey,
+      apiUrl: configuration.apiUrl,
     });
 
     this.commandDispatcher = new EventEmitter();

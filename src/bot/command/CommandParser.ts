@@ -13,15 +13,17 @@ export default class CommandParser {
     return commandArguments;
   }
 
-  private static headTail(str: string): string[] {
-    const pos = str.indexOf(' ');
+  public static headTail(str: string, delimeter?: string): string[] {
+    delimeter = delimeter || ' ';
+
+    const pos = str.indexOf(delimeter);
 
     if (pos < 0) {
       return [str];
     }
 
     const head = str.substr(0, pos);
-    const tail = str.substr(pos + 1);
+    const tail = str.substr(pos + delimeter.length);
 
     return [head, tail];
   }

@@ -5,14 +5,25 @@ import TranslationInterface from './TranslationInterface';
 export default class ComposedMessage {
   private client: Client;
   private channel: Array<TextChannel | DMChannel | User>;
-  private content: string;
+  private content: string | string[];
   private alreadySent: boolean = false;
   private translationInterface: TranslationInterface = new TranslationInterface();
 
-  constructor(client: Client, channel: Array<TextChannel | DMChannel | User>, key: string, ...args: string[]) {
-    const contentKey = `commands.${key}`;
+  constructor(
+    client: Client,
+    channel: Array<TextChannel | DMChannel | User>,
+    key: string | string[],
+    ...args: string[]
+  ) {
+    let contentKey;
 
-    this.content = this.translationInterface.__(contentKey, ...args);
+    if (typeof key === 'object') {
+      this.content = key.map((v) => this.translationInterface.__(undefined, v, ...args));
+    } else {
+      contentKey = `commands.${key}`;
+
+      this.content = this.translationInterface.__(contentKey, ...args);
+    }
 
     this.client = client;
     this.channel = channel;

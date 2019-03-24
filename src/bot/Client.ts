@@ -230,11 +230,18 @@ export default class Client extends EventEmitter {
     channel: Array<TextChannel | DMChannel | User>,
     message: string | string[]
   ): Promise<Array<(Message | Message[])>> {
-    // Chain channels into a promise array...
-    const senders = channel.map((ch: TextChannel | DMChannel | User) => ch.send(message));
+    const msgToSend = typeof message === 'object' ? message : [message];
+    const promises = [];
+
+    // Chain channels and messages into a promise array...
+    channel.map((ch: TextChannel | DMChannel | User) => {
+      msgToSend.forEach((msg) => {
+        promises.push(ch.send(msg));
+      });
+    });
 
     // ... to wait for them to be sent
-    return await Promise.all(senders);
+    return await Promise.all(promises);
   }
 
   public setPresence(alternativeText?: string): void {
