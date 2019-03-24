@@ -1,5 +1,9 @@
 {
 	"commands": {
+		"api": {
+			"talking": "Talking to API...",
+			"validationError": "Validation error:\n```%s```"
+		},
 		"empty": "%s",
 		"channels": {
 			"header": "Connected to following guilds:\n```\n",
