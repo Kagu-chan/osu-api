@@ -233,7 +233,7 @@ export default class Client extends EventEmitter {
     const msgToSend = typeof message === 'object' ? message : [message];
     const promises = [];
 
-    // Chain channels into a promise array...
+    // Chain channels and messages into a promise array...
     channel.map((ch: TextChannel | DMChannel | User) => {
       msgToSend.forEach((msg) => {
         promises.push(ch.send(msg));
