@@ -24,4 +24,8 @@ RUN npm install --production
 
 COPY . .
 
+RUN npm run build
+
+# multi stage container - S1 build, S2 copy prod / i prod / dist run & args
+
 CMD ["npm", "start", "-s"]
