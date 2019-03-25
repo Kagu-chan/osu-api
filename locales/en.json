@@ -33,7 +33,7 @@
       "commands": "Type `@@commands` to get a list of commands available for you in the current scope",
       "commandWronglyPosted": "not meant to be used directly",
       "docs": "Type `@@docs` to see the link to osu!api documentation",
-      "getBeatmaps": "",
+      "getBeatmaps": "Type `@@getBeatmaps` to fetch beatmaps from the API.\n\nOptional parameters are:\n```t (type): `id` or `string` for unclear user names\nsince:    time range to fetch. SQL date\ns (set):  specific mapset\nb (map):  specific beatmap\nu (user): mapper name or id\nm (mode): 0 (default) = osu, 1 = taiko, 2 = ctb, 3 = mania\na:        0 (default) = original maps, 1 = converted maps\nh (hash): map md5\nlimit:    500 (default, maximum) how many maps to be shown\n```",
       "getUser": "Type `@@getUser <user_name>` to fetch an user from the API.\n\nOptional parameters are:\n```m (mode):   0 (default) = osu, 1 = taiko, 2 = ctb, 3 = mania\nt (type):   `id` or `string` for unclear user names\nevent_days: How many days of epic events should be shown (1-31, 1 = default)\n```",
       "help": "Type `@@help <COMMAND>` to get help for the command.\n\nType `@@help` to see this message.\nType `@@commands` to see a list of commands",
       "logout": "Type `@@logout` to log out the bot and terminate the connection to Discord.",
