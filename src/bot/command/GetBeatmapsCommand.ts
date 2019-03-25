@@ -46,17 +46,18 @@ export default class GetBeatmapsCommand extends Command {
 
   protected aliases: object = {
     t: 'type',
-    m: 'mode',
     userName: 'u',
     user_name: 'u',
-    eventDays: 'event_days',
+    converted: 'a',
+    hash: 'h',
+    l: 'limit',
   };
 
   public async handle(message: Message, args: string[]): Promise<ComposedMessage[]> {
     const parsedArgs: string | object = await CommandValidator.validate(this.schemaOptions, this.aliases, args);
 
     if (typeof parsedArgs === 'object') {
-      this.bot.API.request('get_user', parsedArgs)
+      this.bot.API.request('get_beatmaps', parsedArgs)
         .then((data) => this.bot.API.responseToTextMessage(data))
         .then((chunks: string[]) => new ComposedMessage(this.bot.client, [message.channel], chunks))
         .then((composed) => composed.send());
