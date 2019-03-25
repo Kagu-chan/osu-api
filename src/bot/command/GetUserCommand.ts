@@ -10,7 +10,7 @@ export default class GetUserCommand extends Command {
   public readonly scope: CommandScope = CommandScope.STANDARD;
 
   protected schemaOptions: Joi.JoiObject = Joi.object().keys({
-    mode: Joi.number()
+    m: Joi.number()
       .min(0)
       .max(3)
       .default(0)
@@ -33,7 +33,6 @@ export default class GetUserCommand extends Command {
 
   protected aliases: object = {
     first: ['u'],
-    m: 'mode',
     t: 'type',
     userName: 'u',
     user_name: 'u',
