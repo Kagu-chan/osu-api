@@ -16,6 +16,7 @@ import PingCommand from '../command/PingCommand';
 import ReleaseCommand from '../command/ReleaseCommand';
 import Logger from '../Logger';
 import Message from '../Message';
+import { CommandScope } from '../Types';
 import EventHandler from './EventHandler';
 
 export default class CommandEventHandler extends EventHandler {
@@ -48,7 +49,12 @@ export default class CommandEventHandler extends EventHandler {
       Logger.info(`Attached to command event [${commandName}] as [command${capitalCommand}]`);
       this.bot.commandDispatcher.on(
         `command${capitalCommand}`,
-          async (message: Message, commandArguments: string[]) => {
+        async (message: Message, commandArguments: string[]) => {
+          if (command.scope & CommandScope.ONLY_OWNERS) {
+            Logger.info(
+              `${message.author.tag} (${message.author.id}) used restricted command \`${commandName}\``
+            );
+          }
           if (await command.beforeCommand(message)) {
             const answers = await command.handle(message, commandArguments);
 
