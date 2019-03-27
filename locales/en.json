@@ -25,7 +25,7 @@
 		},
 		"maintenance": "**BOT MAINTENANCE!** Bot is going down for maintenance soon - Please be patient",
 		"ping": "pong",
-		"release": "**BOT UPDATED!** New version is *v%s*\n```%s``",
+		"release": "**BOT UPDATED!** New version is *v%s*\n```%s```",
 		"usage": {
       "channels": "Type `@@channels` to get info about the server",
       "commandNotFound": "not meant to be used directly",
