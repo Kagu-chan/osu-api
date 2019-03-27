@@ -25,6 +25,13 @@ export default interface IConfiguration {
   discordOwnerId: string;
 
   /**
+   * Other administrator users
+   *
+   * @var {string[]} discordAdministrators The discord bot administrators, separated by `,`
+   */
+  discordAdministrators: string[];
+
+  /**
    * The regular expression to match for the bot relevant channel names
    *
    * @var {string} discordChannelRegexp The regular expression

@@ -9,6 +9,7 @@ import {
   TextChannel,
   User,
 } from 'discord.js';
+import * as _ from 'lodash';
 import Bot from './Bot';
 import EventEmitter from './EventEmitter';
 import DiscordEvent from './eventHandler/discordEvent/DiscordEvent';
@@ -163,6 +164,11 @@ export default class Client extends EventEmitter {
    */
   public isOnline(): boolean {
     return this.client.status === 0;
+  }
+
+  public isAdministrator(user: User): boolean {
+    return user.id === this.configuration.discordOwnerId
+      || _.includes(this.configuration.discordAdministrators, user.id);
   }
 
   /**
