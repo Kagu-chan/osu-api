@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        -
         - DISCORD_LOGIN_TOKEN=${DISCORD_LOGIN_TOKEN}
         - DISCORD_LOGIN_RETRY_TIMEOUT=${DISCORD_LOGIN_RETRY_TIMEOUT}
         - DISCORD_LOGIN_RETRY_ATTEMPTS=${DISCORD_LOGIN_RETRY_ATTEMPTS}
