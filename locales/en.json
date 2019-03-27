@@ -41,6 +41,22 @@
       "mods": "Type `@@mods` to see the mods definition (bitwise enum)",
       "ping": "Type `@@ping` to get a pong",
       "release": "Type `@@release` to send a release notification message to **ALL servers**"
+		},
+		"description": {
+			"channels": "List servers channels the bot is listening to",
+      "commandNotFound": "not meant to be used directly",
+      "commandNotPermitted": "not meant to be used directly",
+      "commands": "List commands available",
+      "commandWronglyPosted": "not meant to be used directly",
+      "docs": "osu!api documentation link",
+      "getBeatmaps": "Get beatmaps from the api",
+      "getUser": "Get a user from the api",
+      "help": "Help command",
+      "logout": "Logout bot and exit process",
+      "maintenance": "Announce a maintenance",
+      "mods": "Technical documentation about osu game mods",
+      "ping": "Ping Pong",
+      "release": "Post release notes"
 		}
 	},
 	"errors": {
