@@ -8,17 +8,23 @@ export default class CommandsCommand extends Command {
   public readonly scope: CommandScope = CommandScope.STANDARD;
 
   public async handle(message: Message): Promise<ComposedMessage[]> {
-    const botOwner = await this.bot.client.getOwner();
-    const isOwner = botOwner.id === message.author.id;
+    const self = this;
+    const isAdministrator = this.bot.client.isAdministrator(message.author);
     const checkScope = message.isDm ? CommandScope.ONLY_DM : CommandScope.ONLY_CHANNEL;
 
     const commands = this.bot.commandEventHandler.commands;
     const commandsMessage = [
       this.translationInterface.__('commands.commands.header'),
     ];
+    const availableCommands = [];
+    let commandLength = 0;
 
-    const pushCommand = (command) => {
-      commandsMessage.push(`${command}\n`);
+    const pushCommand = (command: string) => {
+      availableCommands.push(command);
+
+      if (commandLength < command.length) {
+        commandLength = command.length;
+      }
     };
 
     commands.forEach((command: Command, commandName: string) => {
@@ -33,13 +39,20 @@ export default class CommandsCommand extends Command {
       }
 
       // Check if the command is a command for owners or not
-      if (command.scope & CommandScope.ONLY_OWNERS && !isOwner) {
+      if (command.scope & CommandScope.ONLY_OWNERS && !isAdministrator) {
         return;
       }
 
       if (command.scope & checkScope) {
         return pushCommand(commandName);
       }
+    });
+
+    availableCommands.forEach((cmd: string) => {
+      const missingCharacters = commandLength - cmd.length;
+      const translation = self.translationInterface.__(`commands.description.${cmd}`);
+
+      commandsMessage.push(`${cmd}${' '.repeat(missingCharacters)} => ${translation}\n`);
     });
 
     commandsMessage.push(this.translationInterface.__('commands.commands.footer'));

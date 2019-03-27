@@ -63,6 +63,7 @@ export default class Bot {
       discordRetryAttemps: configuration.discordRetryAttemps,
       discordRetryTimeout: configuration.discordRetryTimeout,
       discordOwnerId: configuration.discordOwnerId,
+      discordAdministrators: configuration.discordAdministrators,
       discordChannelRegexp: configuration.discordChannelRegexp,
     });
 
