@@ -1,5 +1,22 @@
 FROM node:10
 
+RUN mkdir -p /install
+
+WORKDIR /install
+
+COPY ./package.json /install
+COPY ./RELEASE.json /install
+COPY ./tsconfig.json /install
+COPY ./src /install
+COPY ./locales /install
+
+RUN npm i
+RUN npm run build
+
+RUN rm -Rf node_modules
+
+FROM node:10
+
 RUN set -x \
 	rm -rf /var/lib/apt/lists/*
 
@@ -10,6 +27,7 @@ ARG DISCORD_LOGIN_TOKEN
 ARG DISCORD_LOGIN_RETRY_TIMEOUT
 ARG DISCORD_LOGIN_RETRY_ATTEMPTS
 ARG DISCORD_BOT_OWNER
+ARG DISCORD_BOT_ADMINISTRATORS
 ARG DISCORD_CHANNEL_REGEXP
 ARG COMMAND_PREFIX
 ARG API_KEY
@@ -22,10 +40,6 @@ WORKDIR /var/app
 COPY ./package.json /var/app
 RUN npm install --production
 
-COPY . .
-
-RUN npm run build
-
-# multi stage container - S1 build, S2 copy prod / i prod / dist run & args
+COPY --from=0 /install .
 
 CMD ["npm", "start", "-s"]
