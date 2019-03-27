@@ -21,14 +21,14 @@ export default abstract class Command {
 
   public abstract handle(message: Message, args: string[]): ComposedMessage[] | Promise<ComposedMessage[]>;
 
-  public async beforeCommand(message: Message): Promise<boolean> {
+  public beforeCommand(message: Message): boolean {
     // Check if the scope is standard - in this case everything is allowed
     if (this.scope === CommandScope.STANDARD) {
       return true;
     }
 
     const wrongPlace = !this.isValidChannel(message);
-    const notAllowed = !(await this.isCommandAllowed(message));
+    const notAllowed = !this.isCommandAllowed(message);
     const wasInternal = !this.isCommandNotInternal(message);
 
     const isValidCommand = !(wrongPlace || notAllowed || wasInternal);
@@ -54,12 +54,10 @@ export default abstract class Command {
     return true;
   }
 
-  private async isCommandAllowed(message: Message): Promise<boolean> {
-    const owner = await this.bot.client.getOwner();
-
+  private isCommandAllowed(message: Message): boolean {
     // Check is the scope is owner scope
     if (this.scope & CommandScope.ONLY_OWNERS) {
-      return owner.id === message.author.id;
+      return this.bot.client.isAdministrator(message.author);
     }
 
     return true;

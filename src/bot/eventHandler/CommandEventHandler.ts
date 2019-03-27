@@ -57,7 +57,7 @@ export default class CommandEventHandler extends EventHandler {
               `${message.author.tag} (${message.author.id}) used restricted command \`${commandName}\``
             );
           }
-          if (await command.beforeCommand(message)) {
+          if (command.beforeCommand(message)) {
             const answers = await command.handle(message, commandArguments);
 
             await Promise.all(answers.map((a) => a.send()));

@@ -8,8 +8,7 @@ export default class CommandsCommand extends Command {
   public readonly scope: CommandScope = CommandScope.STANDARD;
 
   public async handle(message: Message): Promise<ComposedMessage[]> {
-    const botOwner = await this.bot.client.getOwner();
-    const isOwner = botOwner.id === message.author.id;
+    const isAdministrator = this.bot.client.isAdministrator(message.author);
     const checkScope = message.isDm ? CommandScope.ONLY_DM : CommandScope.ONLY_CHANNEL;
 
     const commands = this.bot.commandEventHandler.commands;
@@ -33,7 +32,7 @@ export default class CommandsCommand extends Command {
       }
 
       // Check if the command is a command for owners or not
-      if (command.scope & CommandScope.ONLY_OWNERS && !isOwner) {
+      if (command.scope & CommandScope.ONLY_OWNERS && !isAdministrator) {
         return;
       }
 
