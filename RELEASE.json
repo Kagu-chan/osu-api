@@ -17,9 +17,13 @@
     "* Fix connection issue leading to endless loop"
   ],
   "0.3.0": [
+    "* Add support for multiple maintainer users",
     "* Commands can now be triggered by `<prefix><command name>`, `@<bot user> <command name> or in DM just by <command name>",
+    "* Commands are now lower camel case, e.g. `getBeatmaps` instead of `get-beatmaps`",
+    "* The `commands` command describes now the usable commands",
     "* The `commands` command now tells the user which commands he can use in the current scope",
-    "* Added commands to stop the bot - so the bot wont show online if he's already down for maintenance",
+    "* The bot has a presence now - so he'll tell the users how to get help or if he's going into maintenance",
+    "* Added commands to stop the bot for administrators - so the bot wont show online if he's already down for maintenance",
     "* Rewritten whole code with TypeScript"
   ]
 }
