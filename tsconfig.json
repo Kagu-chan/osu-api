@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es2018",
+    "types": ["node", "discord.js"],
+    "inlineSourceMap": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
