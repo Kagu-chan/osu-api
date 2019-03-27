@@ -7,13 +7,11 @@ WORKDIR /install
 COPY ./package.json /install
 COPY ./RELEASE.json /install
 COPY ./tsconfig.json /install
-COPY ./src /install
-COPY ./locales /install
+COPY ./src /install/src
+COPY ./locales /install/locales
 
 RUN npm i
 RUN npm run build
-
-RUN rm -Rf node_modules
 
 FROM node:10
 
@@ -37,9 +35,9 @@ RUN mkdir -p /var/app
 
 WORKDIR /var/app
 
-COPY ./package.json /var/app
+COPY ./package.json .
 RUN npm install --production
 
-COPY --from=0 /install .
+COPY --from=0 /install/dist dist
 
 CMD ["npm", "start", "-s"]
