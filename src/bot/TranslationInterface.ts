@@ -5,7 +5,7 @@ export default class TranslationInterface {
   constructor() {
     configure({
       locales: ['en'],
-      directory: 'locales',
+      directory: 'dist/locales',
       objectNotation: true,
     });
   }
